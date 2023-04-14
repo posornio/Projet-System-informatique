@@ -1,0 +1,188 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include "tableSymbole.h"
+static int globalScope=0;
+static Ts *ts;
+char dernier_op;
+%}
+
+%define parse.trace 
+%error-verbose
+%verbose
+
+%union {
+	char s[128];
+}
+%code provides {
+  int yylex (void);
+  void yyerror (const char *);
+}
+
+%token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID tADD tSUB tMUL tDIV
+%token tLT tGT tNE tEQ tGE tLE tASSIGN tAND tOR tNOT tLBRACE tRBRACE tLPAR tRPAR
+%token tSEMI tCOMMA tNB
+
+%token <s> tID
+%start declaration_fonctions
+%left tOR
+%left tELSE
+%left tAND
+%left tEQ tNE
+%left tLT tGT tLE tGE
+%left tADD tSUB
+%left tMUL tDIV
+%%
+operand : 
+	tNB
+	|math_operation
+	|tID ;
+	
+logical_operator : 
+	tLT
+	|tGT
+	|tNE
+	|tEQ
+	|tGE
+	|tLE
+	|tAND
+	|tOR ;
+	
+logical_operation : 
+	liste_math_operations logical_operator liste_math_operations 
+	| tNOT logical_operation;
+	
+liste_logical_operations : 
+	logical_operation 
+	|logical_operation liste_logical_operations ;
+	
+math_operator : 
+	tADD {dernier_op='+';}
+	|tSUB {dernier_op='-';}
+	|tMUL {dernier_op='*';}
+	|tDIV { {dernier_op='/';} 
+		printf("math_operator ");};
+	
+math_operation :
+	operand math_operator { printf("math_operation \n");
+	printf("%d",SizeTs(ts));
+	Afficher_TS(ts);
+	expression_arithmetique(dernier_op,ts);
+	Afficher_TS(ts);} operand |
+	appel_fonction;
+	
+liste_math_operations :
+	operand
+	|math_operation
+	|math_operation math_operator liste_math_operations 
+	;
+	
+programme: 
+	liste_blocs ;
+
+liste_blocs:
+    bloc
+    |bloc liste_blocs;
+
+my_return: tRETURN liste_math_operations tSEMI ;
+
+my_if :
+	tIF tLPAR liste_logical_operations tRPAR bloc
+    | my_if tELSE   bloc ;
+
+my_while : tWHILE tLPAR liste_logical_operations tRPAR bloc; 
+
+print : tPRINT tLPAR liste_math_operations tRPAR tSEMI;
+    
+liste_id_dec : 
+	tINT tID tCOMMA liste_id_dec ;
+
+
+listeID:
+	tID|
+	tID listeID;
+
+
+liste_id_aff : 
+	tID
+	|tID tCOMMA liste_id_aff ;
+
+declaration_variable : 
+	tINT  tID  tSEMI 	{printf("PUT %d %s \n" ,SizeTs(ts),$2);pushTs(ts,$2,1,0,globalScope);Afficher_TS(ts);}	
+ ;
+	
+initialisation_variable :
+	tINT liste_id_dec tASSIGN liste_math_operations tSEMI{ printf("initialisation_variable  en liste a faire apres\n " ) }
+	|tINT tID tASSIGN liste_math_operations tSEMI{ printf("initialisation_variable  \n "); printf("PUT %d %s \n" ,SizeTs(ts),$2);
+			pushTs(ts,$2,1,0,globalScope);
+		};
+	
+affectation_variable :
+	liste_id_aff tASSIGN liste_math_operations tSEMI{ printf("\n affectation_variable avec \n");};
+	
+declaration_fonctions : declaration_fonction | declaration_fonction declaration_fonctions;
+
+declaration_fonction : 
+	tINT  tID tLPAR liste_parametres_declaration tRPAR bloc 
+	|tVOID tID tLPAR liste_parametres_declaration tRPAR bloc;
+
+appel_fonction : tID tLPAR  liste_parametres_appel tRPAR ;
+appel_fonction_void : tID tLPAR  liste_parametres_appel tRPAR tSEMI;
+
+bracket : tLBRACE{ globalScope++;} | tRBRACE{removeElementsWithScope(globalScope,ts);
+	globalScope--;}
+
+instruction:
+	declaration_variable
+	|affectation_variable
+	|initialisation_variable
+	|declaration_fonction
+	|appel_fonction_void
+	|my_if
+	|my_while
+	|print
+	|my_return;
+	
+liste_instructions :
+	instruction
+	|instruction liste_instructions;
+
+bloc : 
+	instruction
+	|tLBRACE {globalScope++;} liste_instructions tRBRACE { printf("bloc avec scope %d \n",globalScope);
+	globalScope--;};
+	
+parametre_declaration :
+	tINT tID{
+	printf("declaration de %s\n", $2);
+	printf("PUT %d %s\n" ,SizeTs(ts),$2);
+	Afficher_TS(ts);
+	printf("\n \n");
+	pushTs(ts,$2,1,0,globalScope);}	
+	|tVOID { printf("parametre_declaration\n");};
+	
+	
+liste_parametres_declaration :
+	parametre_declaration 
+	|parametre_declaration tCOMMA liste_parametres_declaration;
+	
+parametre_appel :
+	tINT operand 
+	|operand 
+	|tVOID ;
+		
+liste_parametres_appel : 
+	parametre_appel
+	|parametre_appel tCOMMA liste_parametres_appel;
+%%
+
+void yyerror(const char *msg) {
+  fprintf(stderr, "error: %s\n", msg);
+  exit(1);
+}
+
+int main(void) {
+	//yydebug = 1;
+	ts = initTs();
+  yyparse();
+}
