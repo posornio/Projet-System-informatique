@@ -66,9 +66,8 @@ math_operator :
 math_operation :
 	operand math_operator { printf("math_operation \n");
 	printf("%d",SizeTs(ts));
-	Afficher_TS(ts);
 	expression_arithmetique(dernier_op,ts);
-	Afficher_TS(ts);} operand |
+	} operand |
 	appel_fonction;
 	
 liste_math_operations :
@@ -108,13 +107,14 @@ liste_id_aff :
 	|tID tCOMMA liste_id_aff ;
 
 declaration_variable : 
-	tINT  tID  tSEMI 	{printf("PUT %d %s \n" ,SizeTs(ts),$2);pushTs(ts,$2,1,0,globalScope);Afficher_TS(ts);}	
+	tINT  tID  tSEMI 	{pushTs(ts,$2,1,0,globalScope);printf("PUT %d %s \n" ,SizeTs(ts),$2);}	
  ;
 	
 initialisation_variable :
 	tINT liste_id_dec tASSIGN liste_math_operations tSEMI{ printf("initialisation_variable  en liste a faire apres\n " ) }
-	|tINT tID tASSIGN liste_math_operations tSEMI{ printf("initialisation_variable  \n "); printf("PUT %d %s \n" ,SizeTs(ts),$2);
-			pushTs(ts,$2,1,0,globalScope);
+	|tINT tID tASSIGN liste_math_operations tSEMI{pushTs(ts,$2,1,0,globalScope); printf("initialisation_variable  \n "); printf("PUT %d %s \n" ,SizeTs(ts),$2);
+;
+			
 		};
 	
 affectation_variable :
@@ -123,13 +123,16 @@ affectation_variable :
 declaration_fonctions : declaration_fonction | declaration_fonction declaration_fonctions;
 
 declaration_fonction : 
-	tINT  tID tLPAR liste_parametres_declaration tRPAR bloc 
+	tINT  tID tLPAR liste_parametres_declaration {Afficher_TS(ts);} tRPAR {Afficher_TS(ts);} bloc 
 	|tVOID tID tLPAR liste_parametres_declaration tRPAR bloc;
 
 appel_fonction : tID tLPAR  liste_parametres_appel tRPAR ;
 appel_fonction_void : tID tLPAR  liste_parametres_appel tRPAR tSEMI;
 
-bracket : tLBRACE{ globalScope++;} | tRBRACE{removeElementsWithScope(globalScope,ts);
+bracket : tLBRACE{ //globalScope++;
+Afficher_TS(ts);} 
+| tRBRACE{
+	//removeElementsWithScope(globalScope,ts);
 	globalScope--;}
 
 instruction:
@@ -149,16 +152,17 @@ liste_instructions :
 
 bloc : 
 	instruction
-	|tLBRACE {globalScope++;} liste_instructions tRBRACE { printf("bloc avec scope %d \n",globalScope);
-	globalScope--;};
+	|tLBRACE liste_instructions tRBRACE { printf("bloc avec scope %d \n",globalScope);};
 	
 parametre_declaration :
 	tINT tID{
+	
 	printf("declaration de %s\n", $2);
+	pushTs(ts,$2,1,0,globalScope);
 	printf("PUT %d %s\n" ,SizeTs(ts),$2);
-	Afficher_TS(ts);
+	
 	printf("\n \n");
-	pushTs(ts,$2,1,0,globalScope);}	
+	}	
 	|tVOID { printf("parametre_declaration\n");};
 	
 	

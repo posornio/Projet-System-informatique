@@ -4,7 +4,8 @@
 #include <string.h>
 #include "tableSymbole.h"
 
-Element* popTs(Ts *ts){
+Element* popTs(Ts* ts){
+    printf("POP");
     if (ts==NULL || ts->first == NULL){
         exit(EXIT_FAILURE);
     }
@@ -13,7 +14,9 @@ Element* popTs(Ts *ts){
     return elementDepile;
 }
 
-Element* tailTs(Ts *ts){
+Element* tailTs(Ts* ts){
+        printf("TAIL");
+
     if (ts==NULL){
         exit(EXIT_FAILURE);
     }
@@ -36,11 +39,16 @@ Ts* initTs(){
 
 }
 
-void pushTs(Ts *ts, char *s, bool init, int t, int scope){
-    Element *new = malloc(sizeof(Element));
+
+
+void pushTs(Ts* ts, char* s, bool init, int t, int scope){
+    printf("Pile avant PUSH :");
+    Afficher_TS(ts);
+    Element* new =(Element*)malloc(sizeof(Element));
     if (ts==NULL) {
         exit(EXIT_FAILURE);
     }
+    ///printf("PUSHTS AAAAAH\n");
     new->s=s;
     new->init=init;
     new->t=t;
@@ -48,9 +56,14 @@ void pushTs(Ts *ts, char *s, bool init, int t, int scope){
     new->scope=scope;
     new->suivant=ts->first;
     ts->first=new;
+    printf("Pile apres PUSH :");
+
+    Afficher_TS(ts);
     //printf("Pushts de \n",s);
 }
-int pushTswAdr(Ts *ts, char *s, bool init, int t, int scope){
+int pushTswAdr(Ts* ts, char *s, bool init, int t, int scope){
+        printf("PUSHTWS");
+
     Element *new = malloc(sizeof(Element));
     if (ts==NULL) {
         exit(EXIT_FAILURE);
@@ -65,7 +78,8 @@ int pushTswAdr(Ts *ts, char *s, bool init, int t, int scope){
     return new->offset;
 }
 
-void removeElementsWithScope(int scope,Ts *ts){
+void removeElementsWithScope(int scope,Ts* ts){
+        printf("REM");
     
     if (ts == NULL){
         exit(EXIT_FAILURE);
@@ -74,7 +88,7 @@ void removeElementsWithScope(int scope,Ts *ts){
         popTs(ts);
     } 
 }
-int freeTmp(Ts *ts){
+int freeTmp(Ts* ts){
     
     if (ts == NULL){
         exit(EXIT_FAILURE);
@@ -85,21 +99,22 @@ int freeTmp(Ts *ts){
     return(SizeTs(ts)); 
 }
 
-int SizeTs(Ts *ts){
+int SizeTs(Ts* ts){
     int ret=0;
     if (ts==NULL){
         printf("nul\n");
         return 0;
     }
-    Element *e =ts->first;
+    Element* e =ts->first;
     while(e !=NULL){
         ret++;
         //printf("%d",ret);
         e=e->suivant;
     }
+    Afficher_TS(ts);
     return ret;
 }
-int getScopeOf(char* a,Ts *ts){
+int getScopeOf(char* a,Ts* ts){
     if (ts->first == NULL) {
         return 1/0;
     }
@@ -122,17 +137,19 @@ int getOffsetOf(char* a,Ts *ts){
 }
 
 void expression_arithmetique(char sym, Ts *ts ){
+        printf("EXP");
+
     int t1= freeTmp(ts);
     int t2 = SizeTs(ts);
     //t1 et t2 renvoient le offset dans la table des symboles
     if (sym=='+'){
-        printf("ADD%d %d %d\n",t1,t1,t2);
+        printf("ADD %d %d %d\n",t1,t1,t2);
     }
     if (sym=='-'){
-        printf("SUB%d %d %d\n",t1,t1,t2);
+        printf("SUB %d %d %d\n",t1,t1,t2);
     }
     if (sym=='*'){
-        printf("MUL%d %d %d\n",t1,t1,t2);
+        printf("MUL %d %d %d\n",t1,t1,t2);
     }
 }
 void EisId(char *a,Ts *ts,int scope){
@@ -142,10 +159,8 @@ void EisId(char *a,Ts *ts,int scope){
 }
 
 void Afficher_TS(Ts *ts){
-    if(ts == NULL){
-        exit(EXIT_FAILURE);
-    }
-    Element *actuel =ts->first;
+   
+    Element* actuel =ts->first;
 
     while (actuel != NULL)
     {
