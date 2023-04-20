@@ -20,6 +20,7 @@ struct Ts{
     Element *first;
 };
 Ts* initTs();
+void Afficher_TS(Ts *ts);
 Element* popTs(Ts *ts);
 void pushTs(Ts *ts, char *s, bool init, int t, int scope);
 int pushTswAdr(Ts *ts, char *s, bool init, int t, int scope);

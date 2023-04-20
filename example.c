@@ -3,7 +3,7 @@ int compute ( int a, int d) {
     int c = 5;    
     b = a;   
      while (c > 0) {      
-         b = b + a * 4;    }   
+         b = b + a * 4;}   
           return b;}
 void main(void) 
     {  

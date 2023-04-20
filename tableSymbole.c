@@ -48,7 +48,8 @@ void pushTs(Ts* ts, char* s, bool init, int t, int scope){
     if (ts==NULL) {
         exit(EXIT_FAILURE);
     }
-    ///printf("PUSHTS AAAAAH\n");
+    
+    printf("PUSHTS AAAAAH\n");
     new->s=s;
     new->init=init;
     new->t=t;
@@ -137,7 +138,7 @@ int getOffsetOf(char* a,Ts *ts){
 }
 
 void expression_arithmetique(char sym, Ts *ts ){
-        printf("EXP");
+        printf("EXP\n");
 
     int t1= freeTmp(ts);
     int t2 = SizeTs(ts);
