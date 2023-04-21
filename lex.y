@@ -140,7 +140,7 @@ affectation_variable :
 declaration_fonctions : declaration_fonction | declaration_fonction declaration_fonctions;
 
 declaration_fonction : 
-	tINT  tID tLPAR liste_parametres_declaration {Afficher_TS(ts);} tRPAR {Afficher_TS(ts);} bloc 
+	tINT  tID tLPAR liste_parametres_declaration {Afficher_TS(ts);} tRPAR  bloc 
 	|tVOID tID tLPAR liste_parametres_declaration tRPAR bloc;
 
 appel_fonction : tID tLPAR  liste_parametres_appel tRPAR ;
