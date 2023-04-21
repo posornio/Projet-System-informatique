@@ -144,19 +144,39 @@ void expression_arithmetique(char sym, Ts *ts ){
     int t2 = SizeTs(ts);
     //t1 et t2 renvoient le offset dans la table des symboles
     if (sym=='+'){
-        printf("ADD %d %d %d\n",t1,t1,t2);
+        printf("ADD ");
     }
     if (sym=='-'){
-        printf("SUB %d %d %d\n",t1,t1,t2);
-    }
+        printf("SUB ");}
     if (sym=='*'){
-        printf("MUL %d %d %d\n",t1,t1,t2);
+        printf("MUL ");
     }
 }
 void EisId(char *a,Ts *ts,int scope){
     int adr = getOffsetOf(a,ts);
     int adrt = pushTswAdr(ts,"",1,0,scope);
     printf("COP %d %d \n", adr,adrt);
+}
+
+void printComp(char *a){
+    if (strcmp(a,"==")==0){
+        printf("CMPEQ");
+    }
+    if (strcmp(a,"!=")==0){
+        printf("CMPNE");
+    }
+    if (strcmp(a,"<=")==0){
+        printf("CMPLE");
+    }
+    if (strcmp(a,">=")==0){
+        printf("CMPGE");
+    }
+    if (strcmp(a,"<")==0){
+        printf("CMPLT");
+    }
+    if (strcmp(a,">")==0){
+        printf("CMPGT");
+    }
 }
 
 void Afficher_TS(Ts *ts){

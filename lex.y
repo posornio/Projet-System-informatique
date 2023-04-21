@@ -29,7 +29,8 @@ char* dernier_Lop;
 %token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID tADD tSUB tMUL tDIV
 %token tLT tGT tNE tEQ tGE tLE tASSIGN tAND tOR tNOT tLBRACE tRBRACE tLPAR tRPAR
 %token tSEMI tCOMMA 
-
+%type <s> logical_operator
+%type <s> andORdiff
 %token <s> tID
 %token <t_int> tNB
 %start declaration_fonctions
@@ -44,18 +45,20 @@ char* dernier_Lop;
 operand : 
 	tNB {printf("#%d",$1);}
 	|math_operation
-	|tID {printf(" %s ",$1 );} 
-	;
+	|tID {printf(" %s ",$1 );} ;
 	
 logical_operator : 
-	tLT {dernier_Lop="<";}
-	|tGT {dernier_Lop=">";}
-	|tNE {dernier_Lop="!=";}
-	|tEQ {dernier_Lop="==";}
-	|tGE {dernier_Lop=">=";}
-	|tLE {dernier_Lop="<=";}
-	|tAND {dernier_Lop="&&";}
-	|tOR {dernier_Lop="||";}; 
+	tLT {dernier_Lop="<";
+		strcpy($$,"<");}
+	|tGT {dernier_Lop=">";
+	strcpy($$,">");}
+	|tEQ {dernier_Lop="==";
+	strcpy($$,"==");}
+	|tGE {dernier_Lop=">=";
+	strcpy($$,">=");}
+	|tLE {dernier_Lop="<=";
+	strcpy($$,"<=");};
+	
 	
 
 logical_operation2 : 
@@ -64,14 +67,19 @@ logical_operation2 :
 	
 logical_operation :
 	tID logical_operator tID
-	{printf("%d %d",getOffsetOf($1,ts),getOffsetOf($3,ts));}
+	{ printComp($2);printf("%d %d \n",getOffsetOf($1,ts),getOffsetOf($3,ts));}
 	|tNB logical_operator tID
-	{printf("#%d %d",$1,getOffsetOf($3,ts));}
-	| tID logical_operator tNB {printf("%d #%d",getOffsetOf($1,ts),$3);}
+	{ printComp($2);printf("#%d %d\n",$1,getOffsetOf($3,ts));}
+	| tID logical_operator tNB {printComp($2);printf("%d #%d",getOffsetOf($1,ts),$3);}
 ; 
-	
+andORdiff: 
+	|tAND {dernier_Lop="&&";strcpy($$,"&&");}
+	|tOR {dernier_Lop="||";strcpy($$,"||");	}
+	|tNE {dernier_Lop="!=";strcpy($$,"!=");	}; 
+
 liste_logical_operations : 
-	logical_operation 
+	logical_operation {printf("\n");}
+	|tLPAR liste_logical_operations tRPAR andORdiff tLPAR liste_logical_operations tRPAR;
 	|logical_operation liste_logical_operations ;
 	
 math_operator : 
@@ -86,8 +94,7 @@ math_operation :
 	printf("%d",SizeTs(ts));
 	expression_arithmetique(dernier_op,ts);
 	} operand |
-	appel_fonction;
-	
+	appel_fonction;	
 liste_math_operations :
 	operand 
 	|math_operation
@@ -104,7 +111,7 @@ liste_blocs:
 my_return: tRETURN liste_math_operations tSEMI ;
 
 my_if :
-	tIF  {printf("Lb+%d :\n",JmpCounterBefore);} tLPAR  {printf("CMP ");}  liste_logical_operations tRPAR {printf("JNE L+%d",JmpCounter+1);}  bloc {JmpCounter++;printf("JMP Lb+ %d \n L+%d:",JmpCounterBefore,JmpCounter);}
+	tIF  {printf("Lb+%d :\n",JmpCounterBefore);} tLPAR liste_logical_operations tRPAR {printf("JNE L+%d",JmpCounter+1);}  bloc {JmpCounter++;printf("JMP Lb+ %d \n L+%d:",JmpCounterBefore,JmpCounter);}
     | my_if tELSE   bloc ;
 
 my_while : tWHILE {printf("Lb+%d : \n",JmpCounterBefore);} tLPAR  {printf("CMP ");} liste_logical_operations tRPAR {printf("JNE L+%d",JmpCounter+1);} bloc{JmpCounter++;printf("JMP Lb+ %d \n L+%d:",JmpCounterBefore,JmpCounter);}
@@ -140,10 +147,10 @@ affectation_variable :
 declaration_fonctions : declaration_fonction | declaration_fonction declaration_fonctions;
 
 declaration_fonction : 
-	tINT  tID tLPAR liste_parametres_declaration {Afficher_TS(ts);} tRPAR  bloc 
-	|tVOID tID tLPAR liste_parametres_declaration tRPAR bloc;
+	tINT  tID {printf("%s :\n");} tLPAR liste_parametres_declaration {Afficher_TS(ts);} tRPAR  bloc 
+	|tVOID tID {printf("%s :\n");} tLPAR liste_parametres_declaration tRPAR bloc;
 
-appel_fonction : tID tLPAR  liste_parametres_appel tRPAR ;
+appel_fonction : tID {printf("JMP %s\n",$1);} tLPAR  liste_parametres_appel tRPAR ;
 appel_fonction_void : tID tLPAR  liste_parametres_appel tRPAR tSEMI;
 
 bracket : tLBRACE{ //globalScope++;
@@ -194,7 +201,9 @@ parametre_appel :
 		
 liste_parametres_appel : 
 	parametre_appel
-	|parametre_appel tCOMMA liste_parametres_appel;
+	|parametre_appel pushTs(ts,$2,1,0,globalScope);
+	printf("PUT %d %s\n" ,SizeTs(ts),$2);
+	 tCOMMA liste_parametres_appel;
 %%
 
 void yyerror(const char *msg) {

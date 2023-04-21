@@ -21,6 +21,7 @@ struct Ts{
 };
 Ts* initTs();
 void Afficher_TS(Ts *ts);
+void printComp(char *a);
 Element* popTs(Ts *ts);
 void pushTs(Ts *ts, char *s, bool init, int t, int scope);
 int pushTswAdr(Ts *ts, char *s, bool init, int t, int scope);
