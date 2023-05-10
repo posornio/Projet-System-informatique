@@ -10,7 +10,7 @@
 
 %%
             
-[0-9]+             {return(tNB);} 
+[0-9]+             {yylval.t_int = atoi(yytext); return(tNB);} 
 0x[0-9A-Fa-f]+     {return(tNB);} 
 
 "if" {return(tIF);}
@@ -47,7 +47,9 @@
 
 [ \t\n]+  
 
-[a-zA-Z][a-zA-Z0-9]*	{ printf("\n tID: '%s'\n", yytext); strcpy(yylval.s, yytext); return tID; }
+[a-zA-Z][a-zA-Z0-9]*	{ //printf("\n tID: '%s'\n", yytext); 
+strcpy(yylval.s, yytext); 
+return tID; }
 
 . {yyerror(yytext);}
 

@@ -777,7 +777,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 14 "lex.l"
-{return(tNB);} 
+{yylval.t_int = atoi(yytext); return(tNB);} 
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
@@ -940,19 +940,21 @@ YY_RULE_SETUP
 case 33:
 YY_RULE_SETUP
 #line 51 "lex.l"
-{ printf("\n tID: '%s'\n", yytext); strcpy(yylval.s, yytext); return tID; }
+{ //printf("\n tID: '%s'\n", yytext); 
+strcpy(yylval.s, yytext); 
+return tID; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 53 "lex.l"
+#line 55 "lex.l"
 {yyerror(yytext);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 55 "lex.l"
+#line 57 "lex.l"
 ECHO;
 	YY_BREAK
-#line 956 "lex.yy.c"
+#line 958 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1920,7 +1922,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 55 "lex.l"
+#line 57 "lex.l"
 
 
 /*

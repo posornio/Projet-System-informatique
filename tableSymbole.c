@@ -42,14 +42,13 @@ Ts* initTs(){
 
 
 void pushTs(Ts* ts, char* s, bool init, int t, int scope){
-    printf("Pile avant PUSH :");
-    Afficher_TS(ts);
+    //printf("Pile avant PUSH :");
+    //Afficher_TS(ts);
     Element* new =(Element*)malloc(sizeof(Element));
     if (ts==NULL) {
         exit(EXIT_FAILURE);
     }
     
-    printf("PUSHTS AAAAAH\n");
     new->s=s;
     new->init=init;
     new->t=t;
@@ -57,7 +56,7 @@ void pushTs(Ts* ts, char* s, bool init, int t, int scope){
     new->scope=scope;
     new->suivant=ts->first;
     ts->first=new;
-    printf("Pile apres PUSH :");
+    //printf("Pile apres PUSH :");
 
     Afficher_TS(ts);
     //printf("Pushts de \n",s);
@@ -112,7 +111,7 @@ int SizeTs(Ts* ts){
         //printf("%d",ret);
         e=e->suivant;
     }
-    Afficher_TS(ts);
+    //Afficher_TS(ts);
     return ret;
 }
 int getScopeOf(char* a,Ts* ts){
@@ -188,6 +187,6 @@ void Afficher_TS(Ts *ts){
         printf("%s     ",actuel->s);
         actuel = actuel->suivant;
     }
-    printf("\n");
+    printf("\n \n");
     
 }
