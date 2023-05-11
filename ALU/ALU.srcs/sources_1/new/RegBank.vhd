@@ -44,8 +44,23 @@ entity RegBank is
 end RegBank;
 
 architecture Behavioral of RegBank is
-
+type reg is array (7 downto 0) of STD_LOGIC;
+type bank is array(15 downto 0) of  reg;
+signal my_bank: bank;
 begin
+
+process(atA,atB,atW,DATA,W)
+begin
+wait until CLK'event and CLK='1';
+    if RST'event and RST='1' then
+        if RST'event and RST='1'
+            my_bank <= (others=>(others => '0'));
+            
+        else
+        
+    
+
+end process;
 
 
 end Behavioral;
