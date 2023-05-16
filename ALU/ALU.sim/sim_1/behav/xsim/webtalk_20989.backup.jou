@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Tue May 16 10:11:59 2023
+# Process ID: 20989
+# Current directory: /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.sim/sim_1/behav/xsim
+# Command line: wbtcv -mode batch -source /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.sim/sim_1/behav/xsim/xsim.dir/testMB_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.sim/sim_1/behav/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/osorniog/Bureau/Projet -notrace

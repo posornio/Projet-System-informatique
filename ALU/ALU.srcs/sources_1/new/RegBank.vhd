@@ -18,9 +18,9 @@
 -- 
 ----------------------------------------------------------------------------------
 
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -44,23 +44,23 @@ entity RegBank is
 end RegBank;
 
 architecture Behavioral of RegBank is
-type reg is array (7 downto 0) of STD_LOGIC;
-type bank is array(15 downto 0) of  reg;
-signal my_bank: bank;
+type bank is array(15 downto 0) of  STD_LOGIC_VECTOR (7 downto 0);
+signal my_bank: bank:=(others => (others => '0')) ;
 begin
 
-process(atA,atB,atW,DATA,W)
-begin
-wait until CLK'event and CLK='1';
-    if RST'event and RST='1' then
-        if RST'event and RST='1'
-            my_bank <= (others=>(others => '0'));
-            
+process
+    begin
+    wait until CLK'event and CLK='1';
+        if (RST='1') then 
+            my_bank <= (others => (others => '0'));
         else
-        
+            if (W='1') then
+                my_bank(to_integer(unsigned(atW))) <= Data;
+             end if;
+     end if;
     
-
 end process;
-
+QA <= my_bank(to_integer(unsigned(atA)));
+QB <= my_bank(to_integer(unsigned(atB)));
 
 end Behavioral;

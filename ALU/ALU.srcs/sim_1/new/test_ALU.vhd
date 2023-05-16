@@ -46,6 +46,7 @@ architecture Behavioral of test_ALU is
                S : out STD_LOGIC_VECTOR (7 downto 0);
                Ctrl_Alu : in STD_LOGIC_VECTOR (2 downto 0));
    END COMPONENT;
+   
 
    signal A,B: std_logic_vector(7 downto 0):="11100000";
   -- signal ControlTest: std_logic_vector(2 downto 0):=(others=>'0');

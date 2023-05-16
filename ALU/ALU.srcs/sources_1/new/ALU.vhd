@@ -62,15 +62,15 @@ process (A,B,Ctrl_ALU)
         overflow:='0';
     
         case  (Ctrl_Alu) is
-            when "001" =>
+            when "001" => --somme
                 tempR := ('0' & A) + ('0' & B);
                 carry := tempR(8);
                 overflow := (A(7) xor B(7)) and (A(7) xor tempR(7)); 
-            when "010" =>
+            when "010" => --soustraction 
                tempR := ('0' & A) - ('0' & B);
                carry := not tempR(8);
                overflow := (A(7) xor B(7)) and (A(7) xor tempR(7));
-            when "100" =>
+            when "100" => --multiplication
                 tempRMul := A*B;
                 tempR := tempRMul(8 downto 0);
                 if (tempRMul(15 downto 8) /= "00000000") then
