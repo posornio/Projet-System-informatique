@@ -33,8 +33,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity muxIN_MB is
     Port ( A : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (7 downto 0);
-           B : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           B : in STD_LOGIC_VECTOR (7 downto 0);
            mux_out : out STD_LOGIC_VECTOR (7 downto 0));
 end muxIN_MB;
 

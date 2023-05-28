@@ -40,7 +40,19 @@ end muxALU;
 
 architecture Behavioral of muxALU is
 
-begin
+
+begin 
+multiplexALU : process (OP,B, S_ALU) is
+begin 
+  if ( OP > x"0" and OP < x"4") or ( OP > x"9" and OP < x"E") then
+    S <= S_alu; --ADD, MUL, SOU
+   else 
+    S<= B;
+end if;
+
+
+end process;
+
 
 
 end Behavioral;

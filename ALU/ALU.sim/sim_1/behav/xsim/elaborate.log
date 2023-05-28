@@ -17,6 +17,13 @@ Compiling architecture behavioral of entity xil_defaultlib.RegBank [regbank_defa
 Compiling architecture behavioral of entity xil_defaultlib.ALU [alu_default]
 Compiling architecture behavioral of entity xil_defaultlib.MemBank [membank_default]
 Compiling architecture behavioral of entity xil_defaultlib.etage4 [etage4_default]
+Compiling architecture behavioral of entity xil_defaultlib.etage3 [etage3_default]
 Compiling architecture behavioral of entity xil_defaultlib.MuxBr [muxbr_default]
+Compiling architecture behavioral of entity xil_defaultlib.muxALU [muxalu_default]
+Compiling architecture behavioral of entity xil_defaultlib.muxIN_MB [muxin_mb_default]
+Compiling architecture behavioral of entity xil_defaultlib.mux_outMB [mux_outmb_default]
+Compiling architecture behavioral of entity xil_defaultlib.lc_alu [lc_alu_default]
+Compiling architecture behavioral of entity xil_defaultlib.LC_MB [lc_mb_default]
+Compiling architecture behavioral of entity xil_defaultlib.LC_mr [lc_mr_default]
 Compiling architecture behavioral of entity xil_defaultlib.testpipe
 Built simulation snapshot testPipe_behav

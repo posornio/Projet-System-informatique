@@ -33,12 +33,26 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity lc_alu is
     Port ( OP : in STD_LOGIC_VECTOR (3 downto 0);
-           S : in STD_LOGIC_VECTOR (3 downto 0));
+           S : out STD_LOGIC_VECTOR (2 downto 0));
 end lc_alu;
 
 architecture Behavioral of lc_alu is
 
+
 begin
+lcmr : process (OP) is 
+begin
+case OP is
+          when x"1" => s<="001";
+          when x"2" => s<="010";
+          when x"3" => s <= "011";
+          when x"A" => s<="100";
+          when x"B" => s<="101";
+          when x"C" => s <= "110";
+          when x"D" => s <= "111";
+          when others => s <= "000" ;
+  end case;
+end process;
 
 
 end Behavioral;
