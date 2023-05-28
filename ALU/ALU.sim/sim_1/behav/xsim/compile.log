@@ -87,3 +87,67 @@ INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme In
 INFO: [VRFC 10-307] analyzing entity MI_test
 INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/MI_test.vhd" into library xil_defaultlib
 INFO: [VRFC 10-307] analyzing entity MI_test
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity ALU
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemBank.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MemBank
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity ALU
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/Pipeline.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Pipeline
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MuxBr.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MuxBr
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MuxBr.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MuxBr
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MuxBr.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MuxBr
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/etage4.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity etage4
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/etage4.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity etage4
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
