@@ -37,23 +37,28 @@ entity counter is
     Port ( RST : in STD_LOGIC;
            CLK : in STD_LOGIC;
            PAUSE : in STD_LOGIC;
+           jmp: in std_logic;
+           jumpto: in STD_LOGIC_VECTOR (7 downto 0);
            S : out STD_LOGIC_VECTOR (7 downto 0));
 end counter;
 
 architecture Behavioral of counter is
 signal sortie:std_logic_vector(7 downto 0):=x"00";
 begin
-process 
+process(CLK,RST) 
 begin 
-    wait until CLK'event and CLK='1';
     if RST='1' then 
         sortie <= x"00";
+    elsif rising_edge(clk) then
+       if PAUSE='1' then 
+            sortie<=sortie;
+      else 
+        if jmp='0' then sortie<=sortie + x"01";
+        else sortie<=jumpto;
+        end if;
     end if;
-    if PAUSE='0' then 
-        sortie <= sortie + x"01";
     end if;
-    S<=sortie;
-
+    
 end process;
-
+S<=sortie;
 end Behavioral;

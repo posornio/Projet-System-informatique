@@ -39,17 +39,22 @@ architecture Behavioral of testPipe is
 component counter is Port ( RST : in STD_LOGIC;
           CLK : in STD_LOGIC;
           PAUSE : in STD_LOGIC;
+          jmp: in std_logic;
+          jumpto: in STD_LOGIC_VECTOR (7 downto 0);
           S : out STD_LOGIC_VECTOR (7 downto 0));
 end component; 
 
-component GestAleas is  Port ( op_lidi : in STD_LOGIC_VECTOR (7 downto 0);
-          b_lidi : in STD_LOGIC_VECTOR (7 downto 0);
-          c_lidi : in STD_LOGIC_VECTOR (7 downto 0);
-          op_diex : in STD_LOGIC_VECTOR (7 downto 0);
-          a_diex : in STD_LOGIC_VECTOR (7 downto 0);
-          op_em : in STD_LOGIC_VECTOR (7 downto 0);
-          a_em : in STD_LOGIC_VECTOR (7 downto 0);
-          s : out STD_LOGIC);
+component GestAleas is  Port (Inst_LIDI:  in STD_LOGIC_VECTOR (31 downto 0);
+           op_diex : in STD_LOGIC_VECTOR (7 downto 0);
+           a_diex : in STD_LOGIC_VECTOR (7 downto 0);
+           op_em : in STD_LOGIC_VECTOR (7 downto 0);
+           a_em : in STD_LOGIC_VECTOR (7 downto 0);
+           QA: in std_logic_vector(7 downto 0);
+           s : out STD_LOGIC;
+           jmpBit: out std_logic;
+           jumpTo: out std_logic_vector( 7 downto 0);
+           outInst: out  STD_LOGIC_VECTOR (31 downto 0)
+           );
 end component; 
 
 component MemInst is
@@ -197,7 +202,10 @@ signal S_Alu: std_logic_vector(7 downto 0);
 signal aleas: std_logic;
 
 signal OutINSTs: std_logic_vector(31 downto 0);
+signal OutINST_alea: std_logic_vector(31 downto 0);
 
+signal jmp: std_logic;
+signal jumpto: std_logic_vector(7 downto 0);
 
 signal CLk: std_logic:='1';
 signal RST: std_logic:='0';
@@ -207,18 +215,22 @@ begin
  count: counter port map(
     RST=>RST,   
     CLK=>CLK,
+    jmp=>jmp,
+    jumpto=>jumpto,
     PAUSE=>aleas,
     S=>a_MI);
 
 gestA: GestAleas port map(
-     op_lidi=>OUTinsts(23 downto 16),
-     b_lidi => OUTinsts(15 downto 8),
-     c_lidi=> OUTinsts(7 downto 0),
+     inst_LIDI=>Outinsts,
      op_diex=>lidi_op2diex,
      a_diex =>lidi_a2diex,
+     jmpbit=>jmp,
+     jumpto=>jumpto,
+     QA=>qa2mux1,
      op_em =>diex_op2em,
      a_em => diex_a2em, 
-     s=> aleas
+     s=> aleas,
+     outInst=>OutINST_alea
     );
 instbank: MemInst port map(
     at=>a_MI,
@@ -261,12 +273,12 @@ instbank: MemInst port map(
         
   LIDI: etage4 port map(
     --Ain => mi2lidi_a,      
-    Ain=> OUTinsts(31 downto 24),
+    Ain=> OutINST_alea(31 downto 24),
     --OPin => mi2lidi_op,
-    OPin=>OUTinsts(23 downto 16),
+    OPin=>OutINST_alea(23 downto 16),
     --Bin => mi2lidi_b, 
-    Bin=> Outinsts(15 downto 8),
-    Cin => OUTinsts(7 downto 0),
+    Bin=> OutINST_alea(15 downto 8),
+    Cin => OutINST_alea(7 downto 0),
     Aout=> lidi_a2diex,
     OPout => lidi_op2diex,
     Bout => lidi_b2diex,

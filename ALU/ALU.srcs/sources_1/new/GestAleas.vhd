@@ -32,27 +32,40 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity GestAleas is
-    Port ( op_lidi : in STD_LOGIC_VECTOR (7 downto 0);
-           b_lidi : in STD_LOGIC_VECTOR (7 downto 0);
-           c_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+    Port (Inst_LIDI:  in STD_LOGIC_VECTOR (31 downto 0);
            op_diex : in STD_LOGIC_VECTOR (7 downto 0);
            a_diex : in STD_LOGIC_VECTOR (7 downto 0);
            op_em : in STD_LOGIC_VECTOR (7 downto 0);
            a_em : in STD_LOGIC_VECTOR (7 downto 0);
-           
-           s : out STD_LOGIC);
+           QA: in STD_logic_vector(7 downto 0);
+           s : out STD_LOGIC;
+           jmpBit: out std_logic;
+           jumpTo: out std_logic_vector( 7 downto 0);
+           outInst: out  STD_LOGIC_VECTOR (31 downto 0)
+           );
 end GestAleas;
 
 architecture Behavioral of GestAleas is
 signal r_li: std_logic:='0';
 signal w_di: std_logic:='0';
 signal w_ex: std_logic:='0';
+
 signal alea_di: std_logic:='0';
 signal alea_ex: std_logic:='0';
+signal a_lidi: STD_LOGIC_VECTOR (7 downto 0);  
     
+signal op_lidi: STD_LOGIC_VECTOR (7 downto 0);  
+signal b_lidi: STD_LOGIC_VECTOR (7 downto 0) ;
+signal c_lidi: STD_LOGIC_VECTOR (7 downto 0) ;
+
+
     begin
-    
-    r_li <= '1' when op_lidi = x"01"  or op_lidi=x"02"  or op_lidi=x"03"  
+    a_lidi<=Inst_LIDI(31 downto 24);
+    op_lidi<=Inst_LIDI(23 downto 16);
+    b_lidi<=Inst_LIDI(15 downto 8);   
+    c_lidi<=Inst_LIDI(7 downto 0);  
+            
+    r_li <= '1' when op_lidi = x"01"  or op_lidi=x"02"  or op_lidi=x"03" OR op_lidi=x"0F"  
     or op_lidi=x"04"  or op_lidi=x"05"  or op_lidi=x"08"  or op_lidi=x"09"
     else '0';   
     
@@ -61,7 +74,12 @@ signal alea_ex: std_logic:='0';
     
     alea_di <= '1' when r_li='1' and w_di='1' and (b_lidi = a_diex or c_lidi = a_diex) else '0';
     alea_ex <='1' when r_li='1' and w_ex='1' and (b_lidi = a_em or c_lidi = a_em) else '0';
-
+    jmpBit<='1' when ((op_diex=x"0E") or (op_diex=x"0F" and QA="00")) else '0';
+    jumpTo<=a_lidi;
     s <= '1' when alea_di ='1' or alea_ex='1'
      else '0';
+     
+     Outinst <= x"00000000" when alea_di ='1' or alea_ex='1'
+          else Inst_LIDI;
+    
 end Behavioral;
