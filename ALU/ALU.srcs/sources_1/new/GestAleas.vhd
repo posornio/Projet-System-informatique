@@ -74,7 +74,7 @@ signal c_lidi: STD_LOGIC_VECTOR (7 downto 0) ;
     
     alea_di <= '1' when r_li='1' and w_di='1' and (b_lidi = a_diex or c_lidi = a_diex) else '0';
     alea_ex <='1' when r_li='1' and w_ex='1' and (b_lidi = a_em or c_lidi = a_em) else '0';
-    jmpBit<='1' when ((op_diex=x"0E") or (op_diex=x"0F" and QA="00")) else '0';
+    jmpBit<='1' when ((op_diex=x"0E") or (op_diex=x"0F" and QA=x"00")) else '0';
     jumpTo<=a_lidi;
     s <= '1' when alea_di ='1' or alea_ex='1'
      else '0';

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Tue May 30 18:10:18 2023
+# Process ID: 115682
+# Current directory: /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.runs/synth_1
+# Command line: vivado -log Pipeline.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Pipeline.tcl
+# Log file: /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.runs/synth_1/Pipeline.vds
+# Journal file: /home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source Pipeline.tcl -notrace
