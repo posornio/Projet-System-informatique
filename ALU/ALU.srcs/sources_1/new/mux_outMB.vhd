@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity mux_outMB is
     Port ( OUTmb : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (7 downto 0);
            out_mux : out STD_LOGIC_VECTOR (7 downto 0));
 end mux_outMB;
 
@@ -42,8 +42,8 @@ architecture Behavioral of mux_outMB is
 begin 
 multiplex_out_mb: process (OUTmb,OP,B) is 
 begin
-if (OP=x"7") then
-    out_mux <= outmb;
+if (OP=x"07") then
+    out_mux <= outMB;
 else
     out_mux<=B;
 end if;

@@ -39,19 +39,22 @@ architecture Behavioral of MI_test is
 component MemInst is
     Port ( at : in STD_LOGIC_VECTOR (7 downto 0);
            clk : in STD_LOGIC;
+           alea: in STD_LOGIC:='0';
            outInst : out STD_LOGIC_VECTOR (31 downto 0));
 end component;
 
 
-signal at: std_logic_vector(7 downto 0):=x"01";
+signal at: std_logic_vector(7 downto 0):=x"00";
 signal CLk: std_logic:='1';
-signal OUTInst: std_logic_vector(31 downto 0);
+signal alea: std_logic:='0';
+signal outInst: std_logic_vector(31 downto 0);
     constant Clock_period :time:=1Ns;
 
 begin
 testMI: MemInst port map(
 at=>at,
 CLK=>CLK,
+alea=>alea,
 OUTinst=>OUTinst);
 
 clkProcess :process
@@ -59,5 +62,5 @@ clkProcess :process
     clk <= not(clk);
     wait for Clock_period/2;
  end process;
-      at<= x"11" after 10 ns, x"01" after 20 ns,  x"01" after 25 ns;
+      at<= x"01" after 10 ns, x"02" after 20 ns,  x"03" after 25 ns;
 end ;

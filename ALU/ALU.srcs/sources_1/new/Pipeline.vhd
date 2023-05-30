@@ -44,8 +44,25 @@ end Pipeline;
 
 architecture Behavioral of Pipeline is
 
+component counter is Port ( RST : in STD_LOGIC;
+          CLK : in STD_LOGIC;
+          PAUSE : in STD_LOGIC;
+          S : out STD_LOGIC_VECTOR (7 downto 0));
+end component; 
+
+component GestAleas is  Port ( op_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+          b_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+          c_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+          op_diex : in STD_LOGIC_VECTOR (7 downto 0);
+          a_diex : in STD_LOGIC_VECTOR (7 downto 0);
+          op_em : in STD_LOGIC_VECTOR (7 downto 0);
+          a_em : in STD_LOGIC_VECTOR (7 downto 0);
+          s : out STD_LOGIC);
+end component; 
+
 component MemInst is
     Port ( at : in STD_LOGIC_VECTOR (7 downto 0);
+           alea: in STD_LOGIC;
            clk : in STD_LOGIC;
            outInst : out STD_LOGIC_VECTOR (31 downto 0));
 end component;
@@ -79,26 +96,26 @@ end component;
                  QB : out STD_LOGIC_VECTOR (7 downto 0));
       end component;
 Component etage4 port( Ain : in STD_LOGIC_VECTOR (7 downto 0);
-                 OPin : in STD_LOGIC_VECTOR (3 downto 0);
+                 OPin : in STD_LOGIC_VECTOR (7 downto 0);
                  Bin : in STD_LOGIC_VECTOR (7 downto 0);
                  Cin : in STD_LOGIC_VECTOR (7 downto 0);
                  Aout : out STD_LOGIC_VECTOR (7 downto 0);
                  Bout : out STD_LOGIC_VECTOR (7 downto 0);
                  CLK : in STD_LOGIC;
                  Cout : out STD_LOGIC_VECTOR (7 downto 0);
-                 OPout : out STD_LOGIC_VECTOR (3 downto 0));
+                 OPout : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 Component etage3 port( Ain : in STD_LOGIC_VECTOR (7 downto 0);
-                 OPin : in STD_LOGIC_VECTOR (3 downto 0);
+                 OPin : in STD_LOGIC_VECTOR (7 downto 0);
                  Bin : in STD_LOGIC_VECTOR (7 downto 0);
                  Aout : out STD_LOGIC_VECTOR (7 downto 0);
                  Bout : out STD_LOGIC_VECTOR (7 downto 0);
                  CLK : in STD_LOGIC;
-                 OPout : out STD_LOGIC_VECTOR (3 downto 0));
+                 OPout : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 component MuxBr is
-    Port ( OP : in STD_LOGIC_VECTOR (3 downto 0);
+    Port ( OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);          
            QA : in STD_LOGIC_VECTOR (7 downto 0);
            outMux : out STD_LOGIC_VECTOR (7 downto 0));
@@ -106,14 +123,14 @@ end component;
 
 
 Component muxALU Port 
-    ( OP : in STD_LOGIC_VECTOR (3 downto 0);
+    ( OP : in STD_LOGIC_VECTOR (7 downto 0);
        B : in STD_LOGIC_VECTOR (7 downto 0);
        S_ALU : in STD_LOGIC_VECTOR (7 downto 0);
        S : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 Component muxIN_MB port( A : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
            mux_out : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
@@ -121,23 +138,23 @@ end component;
 
 Component mux_outMB port( OUTmb : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (7 downto 0);
            out_mux : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 
 component LC_MB Port (
- OP : in STD_LOGIC_VECTOR (3 downto 0);
+ OP : in STD_LOGIC_VECTOR (7 downto 0);
            s : out STD_LOGIC);
 end component;
 
 component lc_ALU port ( 
-    OP : in STD_LOGIC_VECTOR (3 downto 0);
+    OP : in STD_LOGIC_VECTOR (7 downto 0);
            S : out STD_LOGIC_VECTOR (2 downto 0));
 end component;
 
 component LC_mr port ( 
-    OP : in STD_LOGIC_VECTOR (3 downto 0);
+    OP : in STD_LOGIC_VECTOR (7 downto 0);
     s : out STD_LOGIC);
 end component;
 --signal atAbr: STD_LOGIC_VECTOR (3 downto 0);
@@ -148,27 +165,27 @@ end component;
  signal mi2lidi_a : STD_LOGIC_VECTOR (7 downto 0);
  signal mi2lidi_b :  STD_LOGIC_VECTOR (7 downto 0);
  signal mi2lidi_c :  STD_LOGIC_VECTOR (7 downto 0);
- signal mi2lidi_op :  STD_LOGIC_VECTOR (3 downto 0);
+ signal mi2lidi_op :  STD_LOGIC_VECTOR (7 downto 0);
  
  
   signal lidi_a2diex : STD_LOGIC_VECTOR (7 downto 0);
   signal lidi_b2diex :  STD_LOGIC_VECTOR (7 downto 0);
   signal lidi_c2BR :  STD_LOGIC_VECTOR (7 downto 0);
   signal BR2diex_c:  STD_LOGIC_VECTOR (7 downto 0);
-  signal lidi_op2diex :  STD_LOGIC_VECTOR (3 downto 0);
+  signal lidi_op2diex :  STD_LOGIC_VECTOR (7 downto 0);
  
  
 signal diex_a2em:  STD_LOGIC_VECTOR (7 downto 0);
 signal diex_b2em:  STD_LOGIC_VECTOR (7 downto 0);
 signal muxAlu2em_b:  STD_LOGIC_VECTOR (7 downto 0);
 signal diex_c2em:  STD_LOGIC_VECTOR (7 downto 0);
-signal diex_op2em:  STD_LOGIC_VECTOR (3 downto 0);
+signal diex_op2em:  STD_LOGIC_VECTOR (7 downto 0);
  
  signal em_a2mr:  STD_LOGIC_VECTOR (7 downto 0);
 signal  em_b2mr:  STD_LOGIC_VECTOR (7 downto 0);
 
 signal muxMB2mr: STD_LOGIC_VECTOR (7 downto 0);
-signal em_op2mr:  STD_LOGIC_VECTOR (3 downto 0);
+signal em_op2mr:  STD_LOGIC_VECTOR (7 downto 0);
 
 
 signal mem_re_b2DATA:  STD_LOGIC_VECTOR (7 downto 0);
@@ -188,27 +205,45 @@ signal mr2rb_atW: STD_LOGIC_VECTOR (7 downto 0) ;
 
 signal lc2ALU: std_logic_vector(2 downto 0);
 signal lc2_rw_mb: std_logic :='0';
-signal mr_op2lc: std_logic_VECTOR (3 downto 0) ;
+signal mr_op2lc: std_logic_VECTOR (7 downto 0) ;
 
 signal lc2_wBR: std_logic;
 
 
 signal S_Alu: std_logic_vector(7 downto 0);
+signal aleas: std_logic;
 
 
-
+--signal CLk: std_logic:='1';
+--signal RST: std_logic:='0';
+--constant Clock_period :time:=1Ns;
 
 begin
 
+count: counter port map(
+    RST=>RST,   
+    CLK=>CLK,
+    PAUSE=>aleas,
+    S=>a_MI);
 
-
+gestA: GestAleas port map(
+     op_lidi=>mi2lidi_op,
+     b_lidi => mi2lidi_b,
+     c_lidi=> mi2lidi_c,
+     op_diex=>lidi_op2diex,
+     a_diex =>lidi_a2diex,
+     op_em =>diex_op2em,
+     a_em => diex_a2em, 
+     s=> aleas
+    );
 instbank: MemInst port map(
     at=>a_MI,
     CLK=>CLK,
-    OUTinst(7 downto 0) =>mi2lidi_a,
-    OUTinst(15 downto 8) =>mi2lidi_op,
-    OUTinst(23 downto 16) =>mi2lidi_b,
-    OUTinst(31 downto 24) =>mi2lidi_c
+    alea =>aleas,
+    OUTinst(31 downto 24) =>mi2lidi_a,
+    OUTinst(23 downto 16) =>mi2lidi_op,
+    OUTinst(15 downto 8) =>mi2lidi_b,
+    OUTinst(7 downto 0) =>mi2lidi_c
     );
 
  RegisBank: RegBank port map(

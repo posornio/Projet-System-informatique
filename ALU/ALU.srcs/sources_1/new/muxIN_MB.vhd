@@ -33,7 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity muxIN_MB is
     Port ( A : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
            mux_out : out STD_LOGIC_VECTOR (7 downto 0));
 end muxIN_MB;
@@ -43,7 +43,7 @@ architecture Behavioral of muxIN_MB is
 begin
 multiplex_in_mb : process (A,OP,B) is 
 begin
-if (OP=x"8") then 
+if (OP=x"08") then --store 
     mux_out<= A;
 else
    mux_out<=B;

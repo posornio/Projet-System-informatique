@@ -41,11 +41,16 @@ entity MemBank is
 end MemBank;
 
 architecture Behavioral of MemBank is
-type mem_bank is array(7 downto 0) of  STD_LOGIC_VECTOR (7 downto 0);
-signal my_bank: mem_bank:=(others => (others => '0')) ;
-begin
+type mem_bank is array(0 to 255) of  STD_LOGIC_VECTOR (7 downto 0);
+signal my_bank: mem_bank:= (( x"01"),
+    (x"02"), (x"05") , (x"06") ,(x"07"), (x"08") , (x"09"),(x"0A"), others=>(x"42")) ;
+    
+    begin
 process
 begin
+     --for i in 0 to 7 loop 
+       -- my_bank(i) <=  std_logic_vector(to_unsigned(i, my_bank'length));
+     --end loop; 
     wait until CLK'event and CLK='1';
     if (RST='1') then 
         my_bank <= (others => (others => '0'));

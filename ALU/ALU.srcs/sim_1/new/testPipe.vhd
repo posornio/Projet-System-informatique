@@ -36,7 +36,28 @@ entity testPipe is
 end testPipe;
 
 architecture Behavioral of testPipe is
+component counter is Port ( RST : in STD_LOGIC;
+          CLK : in STD_LOGIC;
+          PAUSE : in STD_LOGIC;
+          S : out STD_LOGIC_VECTOR (7 downto 0));
+end component; 
 
+component GestAleas is  Port ( op_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+          b_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+          c_lidi : in STD_LOGIC_VECTOR (7 downto 0);
+          op_diex : in STD_LOGIC_VECTOR (7 downto 0);
+          a_diex : in STD_LOGIC_VECTOR (7 downto 0);
+          op_em : in STD_LOGIC_VECTOR (7 downto 0);
+          a_em : in STD_LOGIC_VECTOR (7 downto 0);
+          s : out STD_LOGIC);
+end component; 
+
+component MemInst is
+    Port ( at : in STD_LOGIC_VECTOR (7 downto 0);
+           alea: in STD_LOGIC;
+           clk : in STD_LOGIC;
+           outInst : out STD_LOGIC_VECTOR (31 downto 0));
+end component;
  COMPONENT ALU
    PORT(      A : in STD_LOGIC_VECTOR (7 downto 0);
               B : in STD_LOGIC_VECTOR (7 downto 0);
@@ -67,26 +88,26 @@ architecture Behavioral of testPipe is
                  QB : out STD_LOGIC_VECTOR (7 downto 0));
       end component;
 Component etage4 port( Ain : in STD_LOGIC_VECTOR (7 downto 0);
-                 OPin : in STD_LOGIC_VECTOR (3 downto 0);
+                 OPin : in STD_LOGIC_VECTOR (7 downto 0);
                  Bin : in STD_LOGIC_VECTOR (7 downto 0);
                  Cin : in STD_LOGIC_VECTOR (7 downto 0);
                  Aout : out STD_LOGIC_VECTOR (7 downto 0);
                  Bout : out STD_LOGIC_VECTOR (7 downto 0);
                  CLK : in STD_LOGIC;
                  Cout : out STD_LOGIC_VECTOR (7 downto 0);
-                 OPout : out STD_LOGIC_VECTOR (3 downto 0));
+                 OPout : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 Component etage3 port( Ain : in STD_LOGIC_VECTOR (7 downto 0);
-                 OPin : in STD_LOGIC_VECTOR (3 downto 0);
+                 OPin : in STD_LOGIC_VECTOR (7 downto 0);
                  Bin : in STD_LOGIC_VECTOR (7 downto 0);
                  Aout : out STD_LOGIC_VECTOR (7 downto 0);
                  Bout : out STD_LOGIC_VECTOR (7 downto 0);
                  CLK : in STD_LOGIC;
-                 OPout : out STD_LOGIC_VECTOR (3 downto 0));
+                 OPout : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 component MuxBr is
-    Port ( OP : in STD_LOGIC_VECTOR (3 downto 0);
+    Port ( OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);          
            QA : in STD_LOGIC_VECTOR (7 downto 0);
            outMux : out STD_LOGIC_VECTOR (7 downto 0));
@@ -94,14 +115,14 @@ end component;
 
 
 Component muxALU Port 
-    ( OP : in STD_LOGIC_VECTOR (3 downto 0);
+    ( OP : in STD_LOGIC_VECTOR (7 downto 0);
        B : in STD_LOGIC_VECTOR (7 downto 0);
        S_ALU : in STD_LOGIC_VECTOR (7 downto 0);
        S : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 Component muxIN_MB port( A : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
            mux_out : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
@@ -109,85 +130,107 @@ end component;
 
 Component mux_outMB port( OUTmb : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
-           OP : in STD_LOGIC_VECTOR (3 downto 0);
+           OP : in STD_LOGIC_VECTOR (7 downto 0);
            out_mux : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 
 component LC_MB Port (
- OP : in STD_LOGIC_VECTOR (3 downto 0);
+ OP : in STD_LOGIC_VECTOR (7 downto 0);
            s : out STD_LOGIC);
 end component;
 
 component lc_ALU port ( 
-    OP : in STD_LOGIC_VECTOR (3 downto 0);
+    OP : in STD_LOGIC_VECTOR (7 downto 0);
            S : out STD_LOGIC_VECTOR (2 downto 0));
 end component;
 
 component LC_mr port ( 
-    OP : in STD_LOGIC_VECTOR (3 downto 0);
+    OP : in STD_LOGIC_VECTOR (7 downto 0);
     s : out STD_LOGIC);
 end component;
 --signal atAbr: STD_LOGIC_VECTOR (3 downto 0);
 --signal atBbr: STD_LOGIC_VECTOR (3 downto 0);
 --signal atWbr: STD_LOGIC_VECTOR (3 downto 0);
-
-
- signal mi2lidi_a : STD_LOGIC_VECTOR (7 downto 0);
- signal mi2lidi_b :  STD_LOGIC_VECTOR (7 downto 0);
- signal mi2lidi_c :  STD_LOGIC_VECTOR (7 downto 0);
- signal mi2lidi_op :  STD_LOGIC_VECTOR (3 downto 0);
+  signal lidi_a2diex : STD_LOGIC_VECTOR (7 downto 0):=x"00";
+  signal lidi_b2diex :  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+  signal lidi_c2BR :  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+  signal BR2diex_c:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+  signal lidi_op2diex :  STD_LOGIC_VECTOR (7 downto 0):=x"00";
  
  
-  signal lidi_a2diex : STD_LOGIC_VECTOR (7 downto 0);
-  signal lidi_b2diex :  STD_LOGIC_VECTOR (7 downto 0);
-  signal lidi_c2BR :  STD_LOGIC_VECTOR (7 downto 0);
-  signal BR2diex_c:  STD_LOGIC_VECTOR (7 downto 0);
-  signal lidi_op2diex :  STD_LOGIC_VECTOR (3 downto 0);
+signal diex_a2em:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+signal diex_b2em:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+signal muxAlu2em_b:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+signal diex_c2em:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+signal diex_op2em:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
  
- 
-signal diex_a2em:  STD_LOGIC_VECTOR (7 downto 0);
-signal diex_b2em:  STD_LOGIC_VECTOR (7 downto 0);
-signal muxAlu2em_b:  STD_LOGIC_VECTOR (7 downto 0);
-signal diex_c2em:  STD_LOGIC_VECTOR (7 downto 0);
-signal diex_op2em:  STD_LOGIC_VECTOR (3 downto 0);
- 
- signal em_a2mr:  STD_LOGIC_VECTOR (7 downto 0);
-signal  em_b2mr:  STD_LOGIC_VECTOR (7 downto 0);
+ signal em_a2mr:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
+signal  em_b2mr:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
 
-signal muxMB2mr: STD_LOGIC_VECTOR (7 downto 0);
-signal em_op2mr:  STD_LOGIC_VECTOR (3 downto 0);
+signal muxMB2mr: STD_LOGIC_VECTOR (7 downto 0):=x"00";
+signal em_op2mr:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
 
 
-signal mem_re_b2DATA:  STD_LOGIC_VECTOR (7 downto 0);
-signal qa2mux1:std_logic_vector(7 downto 0);
-signal muxAlu2em: std_logic_vector(7 downto 0);
-signal muxatMB: std_logic_vector(7 downto 0);
-signal OutMb2mux4: STD_LOGIC_VECTOR (7 downto 0) ;
+signal mem_re_b2DATA:  STD_LOGIC_VECTOR (7 downto 0):=x"00";
 
-signal mr2rb_atW: STD_LOGIC_VECTOR (7 downto 0) ;
+
+signal a_MI: std_logic_vector(7 downto 0);
+
+signal qa2mux1:std_logic_vector(7 downto 0):=x"00";
+
+signal muxatMB: std_logic_vector(7 downto 0):=x"00";
+
+signal OutMb2mux4: STD_LOGIC_VECTOR (7 downto 0) :=x"00";
+
+signal mr2rb_atW: STD_LOGIC_VECTOR (7 downto 0) :=x"00";
 
 
 signal lc2ALU: std_logic_vector(2 downto 0);
 signal lc2_rw_mb: std_logic :='0';
-signal mr_op2lc: std_logic_VECTOR (3 downto 0) ;
-
+signal mr_op2lc: std_logic_VECTOR (7 downto 0) ;
+signal muxBR2DIEX_b: std_logic_VECTOR (7 downto 0) :=x"00";
 signal lc2_wBR: std_logic;
 
 
 signal S_Alu: std_logic_vector(7 downto 0);
+signal aleas: std_logic;
 
+signal OutINSTs: std_logic_vector(31 downto 0);
 
- 
 
 signal CLk: std_logic:='1';
 signal RST: std_logic:='0';
-constant Clock_period :time:=1Ns;
-
-signal OutInst: std_logic_vector(31 downto 0) :=x"00000000";
-
+constant Clock_period :time:=20 Ns;
 
 begin
+ count: counter port map(
+    RST=>RST,   
+    CLK=>CLK,
+    PAUSE=>aleas,
+    S=>a_MI);
+
+gestA: GestAleas port map(
+     op_lidi=>OUTinsts(23 downto 16),
+     b_lidi => OUTinsts(15 downto 8),
+     c_lidi=> OUTinsts(7 downto 0),
+     op_diex=>lidi_op2diex,
+     a_diex =>lidi_a2diex,
+     op_em =>diex_op2em,
+     a_em => diex_a2em, 
+     s=> aleas
+    );
+instbank: MemInst port map(
+    at=>a_MI,
+    CLK=>CLK,
+    alea =>aleas,
+    --OUTinst(31 downto 24) =>mi2lidi_a,
+    --OUTinst(23 downto 16) =>mi2lidi_op,
+    --OUTinst(15 downto 8) =>mi2lidi_b,
+    --OUTinst(7 downto 0) =>mi2lidi_c
+    OUTinst=>Outinsts
+    );
+
  RegisBank: RegBank port map(
      atA=>lidi_b2diex(3 downto 0),
      atB=>lidi_c2BR (3 downto 0),
@@ -217,10 +260,13 @@ begin
         
         
   LIDI: etage4 port map(
-    Ain => mi2lidi_a,      
-    OPin => mi2lidi_op,
-    Bin => mi2lidi_b, 
-    Cin => mi2lidi_c,
+    --Ain => mi2lidi_a,      
+    Ain=> OUTinsts(31 downto 24),
+    --OPin => mi2lidi_op,
+    OPin=>OUTinsts(23 downto 16),
+    --Bin => mi2lidi_b, 
+    Bin=> Outinsts(15 downto 8),
+    Cin => OUTinsts(7 downto 0),
     Aout=> lidi_a2diex,
     OPout => lidi_op2diex,
     Bout => lidi_b2diex,
@@ -230,7 +276,7 @@ begin
     DIEX: etage4 port map(
         Ain => lidi_a2diex,      
         OPin => lidi_op2diex,
-        Bin => lidi_b2diex, 
+        Bin => muxBR2DIEX_b, 
         Cin => BR2diex_c,
         Aout=> diex_a2em,
         OPout => diex_op2em,
@@ -262,12 +308,12 @@ MuxbrC: MuxBR port map(
     OP=>lidi_op2diex,
     B=>lidi_b2diex,
     QA=>qa2mux1,
-    outMux => muxAlu2em);
+    outMux => muxBR2DIEX_b);
     
    
 MuxALUc: MuxALU port map(  
-        OP=>lidi_op2diex,
-        B=>lidi_b2diex,
+        OP=>diex_op2em,
+        B=>diex_b2em,
         S_ALU=>S_ALU,
         s => muxAlu2em_b);
        
@@ -296,7 +342,6 @@ lcmb: lc_mb port map(
 lcmr: lc_mr port map(
     OP=>mr_op2lc,
     S=>lc2_wBR);
-
       
 clkProcess :process
        begin 
@@ -304,16 +349,10 @@ clkProcess :process
           wait for Clock_period/2;
 end process;
 
-mi2lidi_a<=OutInst(31 downto 24);
-mi2lidi_op <=OUTinst(19 downto 16);
-mi2lidi_b <=OUTinst(15 downto 8);
-mi2lidi_c <= OUTinst(7 downto 0);
 
 --Test somme 1 2
 
-OUTinst <= x"01010203" after 2 ns, x"01030406" after 5 ns, x"01070502" AFTER 10 ns,
-x"01070208" after 15 ns,x"01080207" after 15 ns,
-x"010A0209" after 20 ns, x"010B0204" after 25 ns ;
+
 
 
 end ;

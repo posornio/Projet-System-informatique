@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MuxBr is
-    Port ( OP : in STD_LOGIC_VECTOR (3 downto 0);
+    Port ( OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);          
            QA : in STD_LOGIC_VECTOR (7 downto 0);        
            outMux : out STD_LOGIC_VECTOR (7 downto 0));
@@ -43,12 +43,10 @@ architecture Behavioral of MuxBr is
 begin 
 multiplexBR : process (OP,B, QA) is
 begin 
-  if ( OP > x"0" and OP < x"4") then
-    outMUX <= B; --ADD, MUL, SOU
-  elsif OP=x"6" then
-    outMUX<=QA;
+  if (OP=x"06") or (OP=x"07") then
+    outMUX<=B;
   else 
-  outMUX<= x"69";
+  outMUX<= QA;
 end if;
 
 

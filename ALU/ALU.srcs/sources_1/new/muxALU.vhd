@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity muxALU is
-    Port ( OP : in STD_LOGIC_VECTOR (3 downto 0);
+    Port ( OP : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
            S_ALU : in STD_LOGIC_VECTOR (7 downto 0);
            S : out STD_LOGIC_VECTOR (7 downto 0));
@@ -44,7 +44,7 @@ architecture Behavioral of muxALU is
 begin 
 multiplexALU : process (OP,B, S_ALU) is
 begin 
-  if ( OP > x"0" and OP < x"4") or ( OP > x"9" and OP < x"E") then
+  if ( OP > x"00" and OP < x"04") or ( OP > x"09" and OP < x"0E") then
     S <= S_alu; --ADD, MUL, SOU
    else 
     S<= B;

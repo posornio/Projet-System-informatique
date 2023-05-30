@@ -96,7 +96,7 @@ process (A,B,Ctrl_ALU)
              else 
                 tempR:='0'& x"00";
              end if;
-            when "111" => --a==b   
+            when "111" => --a!=b   
             if (a/=b) then 
                 tempR:='0'& x"01";
             else 
