@@ -231,9 +231,9 @@ gestA: GestAleas port map(
      jmpbit=>jmp,
      jumpto=>jumpto,
      QA=>qa2mux1,
-     QB =>BR2diex_c,
+     QB =>diex_c2em,
      op_em =>diex_op2em,
-     op_memre=>mr_op2lc,
+     op_memre=>em_op2mr,
      a_em => diex_a2em, 
      s=> aleas,
      outInst=>OutINST_alea

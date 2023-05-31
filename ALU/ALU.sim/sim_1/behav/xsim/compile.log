@@ -678,3 +678,19 @@ INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme In
 INFO: [VRFC 10-307] analyzing entity GestAleas
 INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemInst.vhd" into library xil_defaultlib
 INFO: [VRFC 10-307] analyzing entity MemInst
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemInst.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MemInst
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemInst.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MemInst
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/GestAleas.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity GestAleas
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/GestAleas.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity GestAleas
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sim_1/new/testPipe.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity testPipe
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemInst.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MemInst

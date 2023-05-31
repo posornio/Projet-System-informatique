@@ -79,7 +79,7 @@ signal c_lidi: STD_LOGIC_VECTOR (7 downto 0) ;
     alea_di <= '1' when r_li='1' and w_di='1' and (b_lidi = a_diex or c_lidi = a_diex) else '0';
     alea_ex <='1' when r_li='1' and w_ex='1' and (b_lidi = a_em or c_lidi = a_em) else '0';
     jmpBit<='1' when ((op_diex=x"0E") or (op_memre=x"0F" and QA=x"00") 
-    or (op_diex=x"10" and QA=QB) or (op_diex=x"11" and QA/=QB)) else '0';
+    or (op_memre=x"10" and QA=QB) or (op_memre=x"11" and QA/=QB)) else '0';
     jmpAux<='1' when ((op_diex=x"0E") or (op_em=x"0F") or (op_memre=x"0F") or (op_diex=x"0F") 
         or (op_diex=x"10" ) or (op_diex=x"11")) else '0';
     jumpTo<=a_lidi when op_memre=x"0E" or op_lidi=x"0F" or (op_memre=x"10" ) or (op_memre=x"11") ;
