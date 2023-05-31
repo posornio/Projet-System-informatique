@@ -12,4 +12,10 @@ void main(void)
               print(x);  } 
               else {    
                int y = compute(x, 2 * x); 
-               print(y);  }}
+               print(y);  }
+               
+               }
+               
+
+
+

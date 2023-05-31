@@ -20,7 +20,7 @@ Element* tailTs(Ts* ts){
     if (ts==NULL){
         exit(EXIT_FAILURE);
     }
-    Element *retour= malloc(sizeof(*retour));;
+    Element *retour= malloc(sizeof(*retour));
     Element *elementDepile =ts->first;
     if(ts != NULL && ts->first != NULL) {
         retour->s= elementDepile->s;
@@ -42,21 +42,22 @@ Ts* initTs(){
 
 
 void pushTs(Ts* ts, char* s, bool init, int t, int scope){
-    //printf("Pile avant PUSH :");
-    //Afficher_TS(ts);
+    printf("Pile avant PUSH :");
+    Afficher_TS(ts);
     Element* new =(Element*)malloc(sizeof(Element));
     if (ts==NULL) {
         exit(EXIT_FAILURE);
     }
     
-    new->s=s;
+    printf("PUSHTS\n");
+    new->s=strdup(s);
     new->init=init;
     new->t=t;
     new->offset= (ts->first == NULL) ? 0 : ts->first->offset+1;
     new->scope=scope;
     new->suivant=ts->first;
     ts->first=new;
-    //printf("Pile apres PUSH :");
+    printf("Pile apres PUSH :");
 
     Afficher_TS(ts);
     //printf("Pushts de \n",s);
@@ -111,12 +112,12 @@ int SizeTs(Ts* ts){
         //printf("%d",ret);
         e=e->suivant;
     }
-    //Afficher_TS(ts);
+    Afficher_TS(ts);
     return ret;
 }
 int getScopeOf(char* a,Ts* ts){
     if (ts->first == NULL) {
-        return 1/0;
+        return -1;
     }
     Element *e =ts->first;
     while (e && strcmp(e->s, a) != 0){
@@ -127,7 +128,7 @@ int getScopeOf(char* a,Ts* ts){
 }
 int getOffsetOf(char* a,Ts *ts){
     if (ts->first == NULL) {
-        return 1/0;
+        return -1;
     }
     Element *e =ts->first;
     while (e && strcmp(e->s, a) != 0){
@@ -136,46 +137,10 @@ int getOffsetOf(char* a,Ts *ts){
     return e ? e->offset : -1;
 }
 
-void expression_arithmetique(char sym, Ts *ts ){
-        printf("EXP\n");
-
-    int t1= freeTmp(ts);
-    int t2 = SizeTs(ts);
-    //t1 et t2 renvoient le offset dans la table des symboles
-    if (sym=='+'){
-        printf("ADD ");
-    }
-    if (sym=='-'){
-        printf("SUB ");}
-    if (sym=='*'){
-        printf("MUL ");
-    }
-}
 void EisId(char *a,Ts *ts,int scope){
     int adr = getOffsetOf(a,ts);
     int adrt = pushTswAdr(ts,"",1,0,scope);
     printf("COP %d %d \n", adr,adrt);
-}
-
-void printComp(char *a){
-    if (strcmp(a,"==")==0){
-        printf("CMPEQ");
-    }
-    if (strcmp(a,"!=")==0){
-        printf("CMPNE");
-    }
-    if (strcmp(a,"<=")==0){
-        printf("CMPLE");
-    }
-    if (strcmp(a,">=")==0){
-        printf("CMPGE");
-    }
-    if (strcmp(a,"<")==0){
-        printf("CMPLT");
-    }
-    if (strcmp(a,">")==0){
-        printf("CMPGT");
-    }
 }
 
 void Afficher_TS(Ts *ts){
@@ -187,6 +152,6 @@ void Afficher_TS(Ts *ts){
         printf("%s     ",actuel->s);
         actuel = actuel->suivant;
     }
-    printf("\n \n");
+    printf("\n");
     
 }

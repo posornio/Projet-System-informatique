@@ -10,9 +10,11 @@
 
 %%
             
-[0-9]+             {yylval.t_int = atoi(yytext); return(tNB);} 
+[0-9]+             {yylval.t_int= atoi(yytext); return(tNB);} 
 0x[0-9A-Fa-f]+     {return(tNB);} 
 
+
+"main"   {return tMAIN;}
 "if" {return(tIF);}
 "else" {return(tELSE);}
 "while" {return(tWHILE);}
@@ -32,12 +34,7 @@
 ">" {return(tGT);}
 "!=" {return(tNE);}
 "==" {return(tEQ);}
-">=" {return(tGE);}
-"<=" {return(tLE);}
 "=" {return(tASSIGN);}
-"&&" {return(tAND);}
-"||" {return(tOR);}
-"!" {return(tNOT);}
 "{" {return(tLBRACE);}
 "}" {return(tRBRACE);}
 "(" {return(tLPAR);}
@@ -47,9 +44,7 @@
 
 [ \t\n]+  
 
-[a-zA-Z][a-zA-Z0-9]*	{ //printf("\n tID: '%s'\n", yytext); 
-strcpy(yylval.s, yytext); 
-return tID; }
+[a-zA-Z][a-zA-Z0-9]*	{ printf("\n tID: '%s'\n", yytext); strcpy(yylval.s, yytext); return tID; }
 
 . {yyerror(yytext);}
 

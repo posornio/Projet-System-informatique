@@ -1,0 +1,1465 @@
+Grammaire
+
+    0 $accept: declaration_fonctions $end
+
+    1 Expr: Expr tADD Expr
+    2     | Expr tMUL Expr
+    3     | Expr tDIV Expr
+    4     | Expr tSUB Expr
+    5     | Expr tNE Expr
+    6     | Expr tGT Expr
+    7     | Expr tEQ Expr
+    8     | Expr tLT Expr
+    9     | tNB
+   10     | tID
+   11     | appel_fonction
+
+   12 my_return: tRETURN Expr tSEMI
+
+   13 my_else: %empty
+   14        | tELSE bloc
+
+   15 $@1: %empty
+
+   16 $@2: %empty
+
+   17 my_if: tIF tLPAR Expr tRPAR $@1 bloc $@2 my_else
+
+   18 $@3: %empty
+
+   19 $@4: %empty
+
+   20 my_while: tWHILE tLPAR $@3 Expr tRPAR $@4 bloc
+
+   21 print: tPRINT tLPAR Expr tRPAR tSEMI
+
+   22 liste_declaration_variable: tID
+   23                           | tID tCOMMA liste_declaration_variable
+
+   24 declaration_variable: tINT liste_declaration_variable tSEMI
+
+   25 initialisation_variable: tINT tID tASSIGN Expr tSEMI
+
+   26 affectation_variable: tID tASSIGN Expr tSEMI
+
+   27 declaration_fonctions: declaration_fonction
+   28                      | declaration_fonction declaration_fonctions
+
+   29 $@5: %empty
+
+   30 $@6: %empty
+
+   31 declaration_fonction: tINT tID $@5 tLPAR liste_parametres_declaration $@6 tRPAR bloc
+
+   32 $@7: %empty
+
+   33 declaration_fonction: tVOID tID $@7 tLPAR liste_parametres_declaration tRPAR bloc
+   34                     | tINT Main
+   35                     | tVOID Main
+
+   36 $@8: %empty
+
+   37 appel_fonction: tID tLPAR Arg $@8 tRPAR
+
+   38 $@9: %empty
+
+   39 appel_fonction_void: tID tLPAR Arg $@9 tRPAR tSEMI
+
+   40 $@10: %empty
+
+   41 Main: tMAIN $@10 tLPAR liste_parametres_declaration tRPAR bloc
+
+   42 instruction: declaration_variable
+   43            | affectation_variable
+   44            | initialisation_variable
+   45            | appel_fonction_void
+   46            | my_if
+   47            | my_while
+   48            | print
+   49            | my_return
+
+   50 liste_instructions: instruction
+   51                   | instruction liste_instructions
+
+   52 $@11: %empty
+
+   53 bloc: tLBRACE $@11 liste_instructions tRBRACE
+
+   54 parametre_declaration: tINT tID
+   55                      | tVOID
+
+   56 liste_parametres_declaration: parametre_declaration
+   57                             | parametre_declaration tCOMMA liste_parametres_declaration
+
+   58 Arg: Expr
+   59    | Expr tCOMMA Arg
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+    $end (0) 0
+    error (256)
+    tIF (258) 17
+    tELSE (259) 14
+    tWHILE (260) 20
+    tPRINT (261) 21
+    tRETURN (262) 12
+    tINT (263) 24 25 31 34 54
+    tVOID (264) 33 35 55
+    tADD (265) 1
+    tSUB (266) 4
+    tMUL (267) 2
+    tDIV (268) 3
+    tLT (269) 8
+    tGT (270) 6
+    tNE (271) 5
+    tASSIGN (272) 25 26
+    tLBRACE (273) 53
+    tRBRACE (274) 53
+    tLPAR (275) 17 20 21 31 33 37 39 41
+    tRPAR (276) 17 20 21 31 33 37 39 41
+    tSEMI (277) 12 21 24 25 26 39
+    tCOMMA (278) 23 57 59
+    tMAIN (279) 41
+    tID <s> (280) 10 22 23 25 26 31 33 37 39 54
+    tNB <t_int> (281) 9
+    tEQ (282) 7
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+    $accept (28)
+        à gauche: 0
+    Expr <nb> (29)
+        à gauche: 1 2 3 4 5 6 7 8 9 10 11
+        à droite: 1 2 3 4 5 6 7 8 12 17 20 21 25 26 58 59
+    my_return (30)
+        à gauche: 12
+        à droite: 49
+    my_else <t_int> (31)
+        à gauche: 13 14
+        à droite: 17
+    my_if (32)
+        à gauche: 17
+        à droite: 46
+    $@1 (33)
+        à gauche: 15
+        à droite: 17
+    $@2 (34)
+        à gauche: 16
+        à droite: 17
+    my_while (35)
+        à gauche: 20
+        à droite: 47
+    $@3 (36)
+        à gauche: 18
+        à droite: 20
+    $@4 (37)
+        à gauche: 19
+        à droite: 20
+    print (38)
+        à gauche: 21
+        à droite: 48
+    liste_declaration_variable (39)
+        à gauche: 22 23
+        à droite: 23 24
+    declaration_variable (40)
+        à gauche: 24
+        à droite: 42
+    initialisation_variable (41)
+        à gauche: 25
+        à droite: 44
+    affectation_variable (42)
+        à gauche: 26
+        à droite: 43
+    declaration_fonctions (43)
+        à gauche: 27 28
+        à droite: 0 28
+    declaration_fonction (44)
+        à gauche: 31 33 34 35
+        à droite: 27 28
+    $@5 (45)
+        à gauche: 29
+        à droite: 31
+    $@6 (46)
+        à gauche: 30
+        à droite: 31
+    $@7 (47)
+        à gauche: 32
+        à droite: 33
+    appel_fonction (48)
+        à gauche: 37
+        à droite: 11
+    $@8 (49)
+        à gauche: 36
+        à droite: 37
+    appel_fonction_void (50)
+        à gauche: 39
+        à droite: 45
+    $@9 (51)
+        à gauche: 38
+        à droite: 39
+    Main (52)
+        à gauche: 41
+        à droite: 34 35
+    $@10 (53)
+        à gauche: 40
+        à droite: 41
+    instruction (54)
+        à gauche: 42 43 44 45 46 47 48 49
+        à droite: 50 51
+    liste_instructions (55)
+        à gauche: 50 51
+        à droite: 51 53
+    bloc (56)
+        à gauche: 53
+        à droite: 14 17 20 31 33 41
+    $@11 (57)
+        à gauche: 52
+        à droite: 53
+    parametre_declaration (58)
+        à gauche: 54 55
+        à droite: 56 57
+    liste_parametres_declaration (59)
+        à gauche: 56 57
+        à droite: 31 33 41 57
+    Arg (60)
+        à gauche: 58 59
+        à droite: 37 39 59
+
+
+État 0
+
+    0 $accept: . declaration_fonctions $end
+
+    tINT   décalage et aller à l'état 1
+    tVOID  décalage et aller à l'état 2
+
+    declaration_fonctions  aller à l'état 3
+    declaration_fonction   aller à l'état 4
+
+
+État 1
+
+   31 declaration_fonction: tINT . tID $@5 tLPAR liste_parametres_declaration $@6 tRPAR bloc
+   34                     | tINT . Main
+
+    tMAIN  décalage et aller à l'état 5
+    tID    décalage et aller à l'état 6
+
+    Main  aller à l'état 7
+
+
+État 2
+
+   33 declaration_fonction: tVOID . tID $@7 tLPAR liste_parametres_declaration tRPAR bloc
+   35                     | tVOID . Main
+
+    tMAIN  décalage et aller à l'état 5
+    tID    décalage et aller à l'état 8
+
+    Main  aller à l'état 9
+
+
+État 3
+
+    0 $accept: declaration_fonctions . $end
+
+    $end  décalage et aller à l'état 10
+
+
+État 4
+
+   27 declaration_fonctions: declaration_fonction .
+   28                      | declaration_fonction . declaration_fonctions
+
+    tINT   décalage et aller à l'état 1
+    tVOID  décalage et aller à l'état 2
+
+    $défaut  réduction par utilisation de la règle 27 (declaration_fonctions)
+
+    declaration_fonctions  aller à l'état 11
+    declaration_fonction   aller à l'état 4
+
+
+État 5
+
+   41 Main: tMAIN . $@10 tLPAR liste_parametres_declaration tRPAR bloc
+
+    $défaut  réduction par utilisation de la règle 40 ($@10)
+
+    $@10  aller à l'état 12
+
+
+État 6
+
+   31 declaration_fonction: tINT tID . $@5 tLPAR liste_parametres_declaration $@6 tRPAR bloc
+
+    $défaut  réduction par utilisation de la règle 29 ($@5)
+
+    $@5  aller à l'état 13
+
+
+État 7
+
+   34 declaration_fonction: tINT Main .
+
+    $défaut  réduction par utilisation de la règle 34 (declaration_fonction)
+
+
+État 8
+
+   33 declaration_fonction: tVOID tID . $@7 tLPAR liste_parametres_declaration tRPAR bloc
+
+    $défaut  réduction par utilisation de la règle 32 ($@7)
+
+    $@7  aller à l'état 14
+
+
+État 9
+
+   35 declaration_fonction: tVOID Main .
+
+    $défaut  réduction par utilisation de la règle 35 (declaration_fonction)
+
+
+État 10
+
+    0 $accept: declaration_fonctions $end .
+
+    $défaut  accepter
+
+
+État 11
+
+   28 declaration_fonctions: declaration_fonction declaration_fonctions .
+
+    $défaut  réduction par utilisation de la règle 28 (declaration_fonctions)
+
+
+État 12
+
+   41 Main: tMAIN $@10 . tLPAR liste_parametres_declaration tRPAR bloc
+
+    tLPAR  décalage et aller à l'état 15
+
+
+État 13
+
+   31 declaration_fonction: tINT tID $@5 . tLPAR liste_parametres_declaration $@6 tRPAR bloc
+
+    tLPAR  décalage et aller à l'état 16
+
+
+État 14
+
+   33 declaration_fonction: tVOID tID $@7 . tLPAR liste_parametres_declaration tRPAR bloc
+
+    tLPAR  décalage et aller à l'état 17
+
+
+État 15
+
+   41 Main: tMAIN $@10 tLPAR . liste_parametres_declaration tRPAR bloc
+
+    tINT   décalage et aller à l'état 18
+    tVOID  décalage et aller à l'état 19
+
+    parametre_declaration         aller à l'état 20
+    liste_parametres_declaration  aller à l'état 21
+
+
+État 16
+
+   31 declaration_fonction: tINT tID $@5 tLPAR . liste_parametres_declaration $@6 tRPAR bloc
+
+    tINT   décalage et aller à l'état 18
+    tVOID  décalage et aller à l'état 19
+
+    parametre_declaration         aller à l'état 20
+    liste_parametres_declaration  aller à l'état 22
+
+
+État 17
+
+   33 declaration_fonction: tVOID tID $@7 tLPAR . liste_parametres_declaration tRPAR bloc
+
+    tINT   décalage et aller à l'état 18
+    tVOID  décalage et aller à l'état 19
+
+    parametre_declaration         aller à l'état 20
+    liste_parametres_declaration  aller à l'état 23
+
+
+État 18
+
+   54 parametre_declaration: tINT . tID
+
+    tID  décalage et aller à l'état 24
+
+
+État 19
+
+   55 parametre_declaration: tVOID .
+
+    $défaut  réduction par utilisation de la règle 55 (parametre_declaration)
+
+
+État 20
+
+   56 liste_parametres_declaration: parametre_declaration .
+   57                             | parametre_declaration . tCOMMA liste_parametres_declaration
+
+    tCOMMA  décalage et aller à l'état 25
+
+    $défaut  réduction par utilisation de la règle 56 (liste_parametres_declaration)
+
+
+État 21
+
+   41 Main: tMAIN $@10 tLPAR liste_parametres_declaration . tRPAR bloc
+
+    tRPAR  décalage et aller à l'état 26
+
+
+État 22
+
+   31 declaration_fonction: tINT tID $@5 tLPAR liste_parametres_declaration . $@6 tRPAR bloc
+
+    $défaut  réduction par utilisation de la règle 30 ($@6)
+
+    $@6  aller à l'état 27
+
+
+État 23
+
+   33 declaration_fonction: tVOID tID $@7 tLPAR liste_parametres_declaration . tRPAR bloc
+
+    tRPAR  décalage et aller à l'état 28
+
+
+État 24
+
+   54 parametre_declaration: tINT tID .
+
+    $défaut  réduction par utilisation de la règle 54 (parametre_declaration)
+
+
+État 25
+
+   57 liste_parametres_declaration: parametre_declaration tCOMMA . liste_parametres_declaration
+
+    tINT   décalage et aller à l'état 18
+    tVOID  décalage et aller à l'état 19
+
+    parametre_declaration         aller à l'état 20
+    liste_parametres_declaration  aller à l'état 29
+
+
+État 26
+
+   41 Main: tMAIN $@10 tLPAR liste_parametres_declaration tRPAR . bloc
+
+    tLBRACE  décalage et aller à l'état 30
+
+    bloc  aller à l'état 31
+
+
+État 27
+
+   31 declaration_fonction: tINT tID $@5 tLPAR liste_parametres_declaration $@6 . tRPAR bloc
+
+    tRPAR  décalage et aller à l'état 32
+
+
+État 28
+
+   33 declaration_fonction: tVOID tID $@7 tLPAR liste_parametres_declaration tRPAR . bloc
+
+    tLBRACE  décalage et aller à l'état 30
+
+    bloc  aller à l'état 33
+
+
+État 29
+
+   57 liste_parametres_declaration: parametre_declaration tCOMMA liste_parametres_declaration .
+
+    $défaut  réduction par utilisation de la règle 57 (liste_parametres_declaration)
+
+
+État 30
+
+   53 bloc: tLBRACE . $@11 liste_instructions tRBRACE
+
+    $défaut  réduction par utilisation de la règle 52 ($@11)
+
+    $@11  aller à l'état 34
+
+
+État 31
+
+   41 Main: tMAIN $@10 tLPAR liste_parametres_declaration tRPAR bloc .
+
+    $défaut  réduction par utilisation de la règle 41 (Main)
+
+
+État 32
+
+   31 declaration_fonction: tINT tID $@5 tLPAR liste_parametres_declaration $@6 tRPAR . bloc
+
+    tLBRACE  décalage et aller à l'état 30
+
+    bloc  aller à l'état 35
+
+
+État 33
+
+   33 declaration_fonction: tVOID tID $@7 tLPAR liste_parametres_declaration tRPAR bloc .
+
+    $défaut  réduction par utilisation de la règle 33 (declaration_fonction)
+
+
+État 34
+
+   53 bloc: tLBRACE $@11 . liste_instructions tRBRACE
+
+    tIF      décalage et aller à l'état 36
+    tWHILE   décalage et aller à l'état 37
+    tPRINT   décalage et aller à l'état 38
+    tRETURN  décalage et aller à l'état 39
+    tINT     décalage et aller à l'état 40
+    tID      décalage et aller à l'état 41
+
+    my_return                aller à l'état 42
+    my_if                    aller à l'état 43
+    my_while                 aller à l'état 44
+    print                    aller à l'état 45
+    declaration_variable     aller à l'état 46
+    initialisation_variable  aller à l'état 47
+    affectation_variable     aller à l'état 48
+    appel_fonction_void      aller à l'état 49
+    instruction              aller à l'état 50
+    liste_instructions       aller à l'état 51
+
+
+État 35
+
+   31 declaration_fonction: tINT tID $@5 tLPAR liste_parametres_declaration $@6 tRPAR bloc .
+
+    $défaut  réduction par utilisation de la règle 31 (declaration_fonction)
+
+
+État 36
+
+   17 my_if: tIF . tLPAR Expr tRPAR $@1 bloc $@2 my_else
+
+    tLPAR  décalage et aller à l'état 52
+
+
+État 37
+
+   20 my_while: tWHILE . tLPAR $@3 Expr tRPAR $@4 bloc
+
+    tLPAR  décalage et aller à l'état 53
+
+
+État 38
+
+   21 print: tPRINT . tLPAR Expr tRPAR tSEMI
+
+    tLPAR  décalage et aller à l'état 54
+
+
+État 39
+
+   12 my_return: tRETURN . Expr tSEMI
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 57
+    appel_fonction  aller à l'état 58
+
+
+État 40
+
+   24 declaration_variable: tINT . liste_declaration_variable tSEMI
+   25 initialisation_variable: tINT . tID tASSIGN Expr tSEMI
+
+    tID  décalage et aller à l'état 59
+
+    liste_declaration_variable  aller à l'état 60
+
+
+État 41
+
+   26 affectation_variable: tID . tASSIGN Expr tSEMI
+   39 appel_fonction_void: tID . tLPAR Arg $@9 tRPAR tSEMI
+
+    tASSIGN  décalage et aller à l'état 61
+    tLPAR    décalage et aller à l'état 62
+
+
+État 42
+
+   49 instruction: my_return .
+
+    $défaut  réduction par utilisation de la règle 49 (instruction)
+
+
+État 43
+
+   46 instruction: my_if .
+
+    $défaut  réduction par utilisation de la règle 46 (instruction)
+
+
+État 44
+
+   47 instruction: my_while .
+
+    $défaut  réduction par utilisation de la règle 47 (instruction)
+
+
+État 45
+
+   48 instruction: print .
+
+    $défaut  réduction par utilisation de la règle 48 (instruction)
+
+
+État 46
+
+   42 instruction: declaration_variable .
+
+    $défaut  réduction par utilisation de la règle 42 (instruction)
+
+
+État 47
+
+   44 instruction: initialisation_variable .
+
+    $défaut  réduction par utilisation de la règle 44 (instruction)
+
+
+État 48
+
+   43 instruction: affectation_variable .
+
+    $défaut  réduction par utilisation de la règle 43 (instruction)
+
+
+État 49
+
+   45 instruction: appel_fonction_void .
+
+    $défaut  réduction par utilisation de la règle 45 (instruction)
+
+
+État 50
+
+   50 liste_instructions: instruction .
+   51                   | instruction . liste_instructions
+
+    tIF      décalage et aller à l'état 36
+    tWHILE   décalage et aller à l'état 37
+    tPRINT   décalage et aller à l'état 38
+    tRETURN  décalage et aller à l'état 39
+    tINT     décalage et aller à l'état 40
+    tID      décalage et aller à l'état 41
+
+    $défaut  réduction par utilisation de la règle 50 (liste_instructions)
+
+    my_return                aller à l'état 42
+    my_if                    aller à l'état 43
+    my_while                 aller à l'état 44
+    print                    aller à l'état 45
+    declaration_variable     aller à l'état 46
+    initialisation_variable  aller à l'état 47
+    affectation_variable     aller à l'état 48
+    appel_fonction_void      aller à l'état 49
+    instruction              aller à l'état 50
+    liste_instructions       aller à l'état 63
+
+
+État 51
+
+   53 bloc: tLBRACE $@11 liste_instructions . tRBRACE
+
+    tRBRACE  décalage et aller à l'état 64
+
+
+État 52
+
+   17 my_if: tIF tLPAR . Expr tRPAR $@1 bloc $@2 my_else
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 65
+    appel_fonction  aller à l'état 58
+
+
+État 53
+
+   20 my_while: tWHILE tLPAR . $@3 Expr tRPAR $@4 bloc
+
+    $défaut  réduction par utilisation de la règle 18 ($@3)
+
+    $@3  aller à l'état 66
+
+
+État 54
+
+   21 print: tPRINT tLPAR . Expr tRPAR tSEMI
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 67
+    appel_fonction  aller à l'état 58
+
+
+État 55
+
+   10 Expr: tID .
+   37 appel_fonction: tID . tLPAR Arg $@8 tRPAR
+
+    tLPAR  décalage et aller à l'état 68
+
+    $défaut  réduction par utilisation de la règle 10 (Expr)
+
+
+État 56
+
+    9 Expr: tNB .
+
+    $défaut  réduction par utilisation de la règle 9 (Expr)
+
+
+État 57
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   12 my_return: tRETURN Expr . tSEMI
+
+    tADD   décalage et aller à l'état 69
+    tSUB   décalage et aller à l'état 70
+    tMUL   décalage et aller à l'état 71
+    tDIV   décalage et aller à l'état 72
+    tLT    décalage et aller à l'état 73
+    tGT    décalage et aller à l'état 74
+    tNE    décalage et aller à l'état 75
+    tSEMI  décalage et aller à l'état 76
+    tEQ    décalage et aller à l'état 77
+
+
+État 58
+
+   11 Expr: appel_fonction .
+
+    $défaut  réduction par utilisation de la règle 11 (Expr)
+
+
+État 59
+
+   22 liste_declaration_variable: tID .
+   23                           | tID . tCOMMA liste_declaration_variable
+   25 initialisation_variable: tINT tID . tASSIGN Expr tSEMI
+
+    tASSIGN  décalage et aller à l'état 78
+    tCOMMA   décalage et aller à l'état 79
+
+    $défaut  réduction par utilisation de la règle 22 (liste_declaration_variable)
+
+
+État 60
+
+   24 declaration_variable: tINT liste_declaration_variable . tSEMI
+
+    tSEMI  décalage et aller à l'état 80
+
+
+État 61
+
+   26 affectation_variable: tID tASSIGN . Expr tSEMI
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 81
+    appel_fonction  aller à l'état 58
+
+
+État 62
+
+   39 appel_fonction_void: tID tLPAR . Arg $@9 tRPAR tSEMI
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 82
+    appel_fonction  aller à l'état 58
+    Arg             aller à l'état 83
+
+
+État 63
+
+   51 liste_instructions: instruction liste_instructions .
+
+    $défaut  réduction par utilisation de la règle 51 (liste_instructions)
+
+
+État 64
+
+   53 bloc: tLBRACE $@11 liste_instructions tRBRACE .
+
+    $défaut  réduction par utilisation de la règle 53 (bloc)
+
+
+État 65
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   17 my_if: tIF tLPAR Expr . tRPAR $@1 bloc $@2 my_else
+
+    tADD   décalage et aller à l'état 69
+    tSUB   décalage et aller à l'état 70
+    tMUL   décalage et aller à l'état 71
+    tDIV   décalage et aller à l'état 72
+    tLT    décalage et aller à l'état 73
+    tGT    décalage et aller à l'état 74
+    tNE    décalage et aller à l'état 75
+    tRPAR  décalage et aller à l'état 84
+    tEQ    décalage et aller à l'état 77
+
+
+État 66
+
+   20 my_while: tWHILE tLPAR $@3 . Expr tRPAR $@4 bloc
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 85
+    appel_fonction  aller à l'état 58
+
+
+État 67
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   21 print: tPRINT tLPAR Expr . tRPAR tSEMI
+
+    tADD   décalage et aller à l'état 69
+    tSUB   décalage et aller à l'état 70
+    tMUL   décalage et aller à l'état 71
+    tDIV   décalage et aller à l'état 72
+    tLT    décalage et aller à l'état 73
+    tGT    décalage et aller à l'état 74
+    tNE    décalage et aller à l'état 75
+    tRPAR  décalage et aller à l'état 86
+    tEQ    décalage et aller à l'état 77
+
+
+État 68
+
+   37 appel_fonction: tID tLPAR . Arg $@8 tRPAR
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 82
+    appel_fonction  aller à l'état 58
+    Arg             aller à l'état 87
+
+
+État 69
+
+    1 Expr: Expr tADD . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 88
+    appel_fonction  aller à l'état 58
+
+
+État 70
+
+    4 Expr: Expr tSUB . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 89
+    appel_fonction  aller à l'état 58
+
+
+État 71
+
+    2 Expr: Expr tMUL . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 90
+    appel_fonction  aller à l'état 58
+
+
+État 72
+
+    3 Expr: Expr tDIV . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 91
+    appel_fonction  aller à l'état 58
+
+
+État 73
+
+    8 Expr: Expr tLT . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 92
+    appel_fonction  aller à l'état 58
+
+
+État 74
+
+    6 Expr: Expr tGT . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 93
+    appel_fonction  aller à l'état 58
+
+
+État 75
+
+    5 Expr: Expr tNE . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 94
+    appel_fonction  aller à l'état 58
+
+
+État 76
+
+   12 my_return: tRETURN Expr tSEMI .
+
+    $défaut  réduction par utilisation de la règle 12 (my_return)
+
+
+État 77
+
+    7 Expr: Expr tEQ . Expr
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 95
+    appel_fonction  aller à l'état 58
+
+
+État 78
+
+   25 initialisation_variable: tINT tID tASSIGN . Expr tSEMI
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 96
+    appel_fonction  aller à l'état 58
+
+
+État 79
+
+   23 liste_declaration_variable: tID tCOMMA . liste_declaration_variable
+
+    tID  décalage et aller à l'état 97
+
+    liste_declaration_variable  aller à l'état 98
+
+
+État 80
+
+   24 declaration_variable: tINT liste_declaration_variable tSEMI .
+
+    $défaut  réduction par utilisation de la règle 24 (declaration_variable)
+
+
+État 81
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   26 affectation_variable: tID tASSIGN Expr . tSEMI
+
+    tADD   décalage et aller à l'état 69
+    tSUB   décalage et aller à l'état 70
+    tMUL   décalage et aller à l'état 71
+    tDIV   décalage et aller à l'état 72
+    tLT    décalage et aller à l'état 73
+    tGT    décalage et aller à l'état 74
+    tNE    décalage et aller à l'état 75
+    tSEMI  décalage et aller à l'état 99
+    tEQ    décalage et aller à l'état 77
+
+
+État 82
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   58 Arg: Expr .
+   59    | Expr . tCOMMA Arg
+
+    tADD    décalage et aller à l'état 69
+    tSUB    décalage et aller à l'état 70
+    tMUL    décalage et aller à l'état 71
+    tDIV    décalage et aller à l'état 72
+    tLT     décalage et aller à l'état 73
+    tGT     décalage et aller à l'état 74
+    tNE     décalage et aller à l'état 75
+    tCOMMA  décalage et aller à l'état 100
+    tEQ     décalage et aller à l'état 77
+
+    $défaut  réduction par utilisation de la règle 58 (Arg)
+
+
+État 83
+
+   39 appel_fonction_void: tID tLPAR Arg . $@9 tRPAR tSEMI
+
+    $défaut  réduction par utilisation de la règle 38 ($@9)
+
+    $@9  aller à l'état 101
+
+
+État 84
+
+   17 my_if: tIF tLPAR Expr tRPAR . $@1 bloc $@2 my_else
+
+    $défaut  réduction par utilisation de la règle 15 ($@1)
+
+    $@1  aller à l'état 102
+
+
+État 85
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   20 my_while: tWHILE tLPAR $@3 Expr . tRPAR $@4 bloc
+
+    tADD   décalage et aller à l'état 69
+    tSUB   décalage et aller à l'état 70
+    tMUL   décalage et aller à l'état 71
+    tDIV   décalage et aller à l'état 72
+    tLT    décalage et aller à l'état 73
+    tGT    décalage et aller à l'état 74
+    tNE    décalage et aller à l'état 75
+    tRPAR  décalage et aller à l'état 103
+    tEQ    décalage et aller à l'état 77
+
+
+État 86
+
+   21 print: tPRINT tLPAR Expr tRPAR . tSEMI
+
+    tSEMI  décalage et aller à l'état 104
+
+
+État 87
+
+   37 appel_fonction: tID tLPAR Arg . $@8 tRPAR
+
+    $défaut  réduction par utilisation de la règle 36 ($@8)
+
+    $@8  aller à l'état 105
+
+
+État 88
+
+    1 Expr: Expr . tADD Expr
+    1     | Expr tADD Expr .
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+
+    tMUL  décalage et aller à l'état 71
+    tDIV  décalage et aller à l'état 72
+
+    $défaut  réduction par utilisation de la règle 1 (Expr)
+
+
+État 89
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    4     | Expr tSUB Expr .
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+
+    tMUL  décalage et aller à l'état 71
+    tDIV  décalage et aller à l'état 72
+
+    $défaut  réduction par utilisation de la règle 4 (Expr)
+
+
+État 90
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    2     | Expr tMUL Expr .
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+
+    $défaut  réduction par utilisation de la règle 2 (Expr)
+
+
+État 91
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    3     | Expr tDIV Expr .
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+
+    $défaut  réduction par utilisation de la règle 3 (Expr)
+
+
+État 92
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+    8     | Expr tLT Expr .
+
+    tADD  décalage et aller à l'état 69
+    tSUB  décalage et aller à l'état 70
+    tMUL  décalage et aller à l'état 71
+    tDIV  décalage et aller à l'état 72
+
+    $défaut  réduction par utilisation de la règle 8 (Expr)
+
+
+État 93
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    6     | Expr tGT Expr .
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+
+    tADD  décalage et aller à l'état 69
+    tSUB  décalage et aller à l'état 70
+    tMUL  décalage et aller à l'état 71
+    tDIV  décalage et aller à l'état 72
+
+    $défaut  réduction par utilisation de la règle 6 (Expr)
+
+
+État 94
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    5     | Expr tNE Expr .
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+
+    tADD  décalage et aller à l'état 69
+    tSUB  décalage et aller à l'état 70
+    tMUL  décalage et aller à l'état 71
+    tDIV  décalage et aller à l'état 72
+    tLT   décalage et aller à l'état 73
+    tGT   décalage et aller à l'état 74
+
+    $défaut  réduction par utilisation de la règle 5 (Expr)
+
+
+État 95
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    7     | Expr tEQ Expr .
+    8     | Expr . tLT Expr
+
+    tADD  décalage et aller à l'état 69
+    tSUB  décalage et aller à l'état 70
+    tMUL  décalage et aller à l'état 71
+    tDIV  décalage et aller à l'état 72
+    tLT   décalage et aller à l'état 73
+    tGT   décalage et aller à l'état 74
+    tNE   décalage et aller à l'état 75
+    tEQ   décalage et aller à l'état 77
+
+    $défaut  réduction par utilisation de la règle 7 (Expr)
+
+
+État 96
+
+    1 Expr: Expr . tADD Expr
+    2     | Expr . tMUL Expr
+    3     | Expr . tDIV Expr
+    4     | Expr . tSUB Expr
+    5     | Expr . tNE Expr
+    6     | Expr . tGT Expr
+    7     | Expr . tEQ Expr
+    8     | Expr . tLT Expr
+   25 initialisation_variable: tINT tID tASSIGN Expr . tSEMI
+
+    tADD   décalage et aller à l'état 69
+    tSUB   décalage et aller à l'état 70
+    tMUL   décalage et aller à l'état 71
+    tDIV   décalage et aller à l'état 72
+    tLT    décalage et aller à l'état 73
+    tGT    décalage et aller à l'état 74
+    tNE    décalage et aller à l'état 75
+    tSEMI  décalage et aller à l'état 106
+    tEQ    décalage et aller à l'état 77
+
+
+État 97
+
+   22 liste_declaration_variable: tID .
+   23                           | tID . tCOMMA liste_declaration_variable
+
+    tCOMMA  décalage et aller à l'état 79
+
+    $défaut  réduction par utilisation de la règle 22 (liste_declaration_variable)
+
+
+État 98
+
+   23 liste_declaration_variable: tID tCOMMA liste_declaration_variable .
+
+    $défaut  réduction par utilisation de la règle 23 (liste_declaration_variable)
+
+
+État 99
+
+   26 affectation_variable: tID tASSIGN Expr tSEMI .
+
+    $défaut  réduction par utilisation de la règle 26 (affectation_variable)
+
+
+État 100
+
+   59 Arg: Expr tCOMMA . Arg
+
+    tID  décalage et aller à l'état 55
+    tNB  décalage et aller à l'état 56
+
+    Expr            aller à l'état 82
+    appel_fonction  aller à l'état 58
+    Arg             aller à l'état 107
+
+
+État 101
+
+   39 appel_fonction_void: tID tLPAR Arg $@9 . tRPAR tSEMI
+
+    tRPAR  décalage et aller à l'état 108
+
+
+État 102
+
+   17 my_if: tIF tLPAR Expr tRPAR $@1 . bloc $@2 my_else
+
+    tLBRACE  décalage et aller à l'état 30
+
+    bloc  aller à l'état 109
+
+
+État 103
+
+   20 my_while: tWHILE tLPAR $@3 Expr tRPAR . $@4 bloc
+
+    $défaut  réduction par utilisation de la règle 19 ($@4)
+
+    $@4  aller à l'état 110
+
+
+État 104
+
+   21 print: tPRINT tLPAR Expr tRPAR tSEMI .
+
+    $défaut  réduction par utilisation de la règle 21 (print)
+
+
+État 105
+
+   37 appel_fonction: tID tLPAR Arg $@8 . tRPAR
+
+    tRPAR  décalage et aller à l'état 111
+
+
+État 106
+
+   25 initialisation_variable: tINT tID tASSIGN Expr tSEMI .
+
+    $défaut  réduction par utilisation de la règle 25 (initialisation_variable)
+
+
+État 107
+
+   59 Arg: Expr tCOMMA Arg .
+
+    $défaut  réduction par utilisation de la règle 59 (Arg)
+
+
+État 108
+
+   39 appel_fonction_void: tID tLPAR Arg $@9 tRPAR . tSEMI
+
+    tSEMI  décalage et aller à l'état 112
+
+
+État 109
+
+   17 my_if: tIF tLPAR Expr tRPAR $@1 bloc . $@2 my_else
+
+    $défaut  réduction par utilisation de la règle 16 ($@2)
+
+    $@2  aller à l'état 113
+
+
+État 110
+
+   20 my_while: tWHILE tLPAR $@3 Expr tRPAR $@4 . bloc
+
+    tLBRACE  décalage et aller à l'état 30
+
+    bloc  aller à l'état 114
+
+
+État 111
+
+   37 appel_fonction: tID tLPAR Arg $@8 tRPAR .
+
+    $défaut  réduction par utilisation de la règle 37 (appel_fonction)
+
+
+État 112
+
+   39 appel_fonction_void: tID tLPAR Arg $@9 tRPAR tSEMI .
+
+    $défaut  réduction par utilisation de la règle 39 (appel_fonction_void)
+
+
+État 113
+
+   17 my_if: tIF tLPAR Expr tRPAR $@1 bloc $@2 . my_else
+
+    tELSE  décalage et aller à l'état 115
+
+    $défaut  réduction par utilisation de la règle 13 (my_else)
+
+    my_else  aller à l'état 116
+
+
+État 114
+
+   20 my_while: tWHILE tLPAR $@3 Expr tRPAR $@4 bloc .
+
+    $défaut  réduction par utilisation de la règle 20 (my_while)
+
+
+État 115
+
+   14 my_else: tELSE . bloc
+
+    tLBRACE  décalage et aller à l'état 30
+
+    bloc  aller à l'état 117
+
+
+État 116
+
+   17 my_if: tIF tLPAR Expr tRPAR $@1 bloc $@2 my_else .
+
+    $défaut  réduction par utilisation de la règle 17 (my_if)
+
+
+État 117
+
+   14 my_else: tELSE bloc .
+
+    $défaut  réduction par utilisation de la règle 14 (my_else)
