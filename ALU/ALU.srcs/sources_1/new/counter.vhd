@@ -52,6 +52,7 @@ begin
     elsif rising_edge(clk) then
        if PAUSE='1' then 
             sortie<=sortie;
+        if jmp='1' then sortie<=jumpto; end if;
       else 
         if jmp='0' then sortie<=sortie + x"01";
         else sortie<=jumpto;

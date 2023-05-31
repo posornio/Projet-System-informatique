@@ -37,6 +37,7 @@ entity RegBank is
            atW : in STD_LOGIC_VECTOR (3 downto 0);
            W : in STD_LOGIC;
            DATA : in STD_LOGIC_VECTOR (7 downto 0);
+           op : in STD_LOGIC_VECTOR (7 downto 0);
            RST : in STD_LOGIC;
            CLK : in STD_LOGIC;
            QA : out STD_LOGIC_VECTOR (7 downto 0);
@@ -69,7 +70,7 @@ process
      end if;
     
 end process;
-QA <= my_bank(to_integer(unsigned(atA)));
-QB <= my_bank(to_integer(unsigned(atB)));
+QA <= my_bank(to_integer(unsigned(atA))) when op/=x"00";
+QB <= my_bank(to_integer(unsigned(atB))) when op/=x"00";
 
 end Behavioral;

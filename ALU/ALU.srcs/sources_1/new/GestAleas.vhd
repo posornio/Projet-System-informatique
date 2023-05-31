@@ -49,7 +49,7 @@ architecture Behavioral of GestAleas is
 signal r_li: std_logic:='0';
 signal w_di: std_logic:='0';
 signal w_ex: std_logic:='0';
-
+signal jmpAux: std_logic:='0';
 signal alea_di: std_logic:='0';
 signal alea_ex: std_logic:='0';
 signal a_lidi: STD_LOGIC_VECTOR (7 downto 0);  
@@ -75,11 +75,14 @@ signal c_lidi: STD_LOGIC_VECTOR (7 downto 0) ;
     alea_di <= '1' when r_li='1' and w_di='1' and (b_lidi = a_diex or c_lidi = a_diex) else '0';
     alea_ex <='1' when r_li='1' and w_ex='1' and (b_lidi = a_em or c_lidi = a_em) else '0';
     jmpBit<='1' when ((op_diex=x"0E") or (op_diex=x"0F" and QA=x"00")) else '0';
+    jmpAux<='1' when ((op_diex=x"0E") or (op_diex=x"0F" and QA=x"00")) else '0';
+
+    
     jumpTo<=a_lidi;
-    s <= '1' when alea_di ='1' or alea_ex='1'
+    s <= '1' when alea_di ='1' or alea_ex='1' or jmpAux='1'
      else '0';
      
-     Outinst <= x"00000000" when alea_di ='1' or alea_ex='1'
+     Outinst <= x"00000000" when alea_di ='1' or alea_ex='1' 
           else Inst_LIDI;
     
 end Behavioral;

@@ -42,7 +42,7 @@ architecture Behavioral of LC_mr is
 begin
 lcmr : process (OP) is 
 begin
-if (OP=x"08") then 
+if (OP=x"08") or op=x"00" then 
     s<='0';
 else
    s<='1';
