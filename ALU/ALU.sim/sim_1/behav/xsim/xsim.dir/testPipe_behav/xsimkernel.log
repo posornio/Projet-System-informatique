@@ -1,4 +1,4 @@
-Running: xsim.dir/testPipe_behav/xsimk -simmode gui -wdb testPipe_behav.wdb -simrunnum 0 -socket 48763
+Running: xsim.dir/testPipe_behav/xsimk -simmode gui -wdb testPipe_behav.wdb -simrunnum 0 -socket 47111
 Design successfully loaded
 Design Loading Memory Usage: 32728 KB (Peak: 32780 KB)
-Design Loading CPU Usage: 10 ms
+Design Loading CPU Usage: 20 ms

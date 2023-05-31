@@ -77,7 +77,7 @@ process
      end if;
     
 end process;
-QA <= my_bank(to_integer(unsigned(atA))) when OP/=x"00" else auxa;
-QB <= my_bank(to_integer(unsigned(atB)))when OP/=x"00" else auxb;
+QA <= my_bank(to_integer(unsigned(atA))) when w='0' or Ata/=atW  else DATA ;
+QB <= my_bank(to_integer(unsigned(atB))) when w='0' or AtB/=atW  else DATA;
 
 end Behavioral;

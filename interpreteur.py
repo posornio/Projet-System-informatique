@@ -63,10 +63,8 @@ def instToOpBin(str):
             return "10"
         case "JMPNE":
             return "11"
-        case "JMPEQ":
-            return "12"
         case "EQ":
-            return "13"
+            return "12"
         case "NE":
             return "14"
         case _:
