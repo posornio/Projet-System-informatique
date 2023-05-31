@@ -37,7 +37,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity ALU is
     Port ( A : in STD_LOGIC_VECTOR (7 downto 0);
            B : in STD_LOGIC_VECTOR (7 downto 0);
-           Ctrl_Alu : in STD_LOGIC_VECTOR (2 downto 0);
+           Ctrl_Alu : in STD_LOGIC_VECTOR (3 downto 0);
            N : out STD_LOGIC;
            O : out STD_LOGIC;
            Z : out STD_LOGIC;
@@ -62,15 +62,15 @@ process (A,B,Ctrl_ALU)
         overflow:='0';
     
         case  (Ctrl_Alu) is
-            when "001" => --somme
+            when "0001" => --somme
                 tempR := ('0' & A) + ('0' & B);
                 carry := tempR(8);
                 overflow := (A(7) xor B(7)) and (A(7) xor tempR(7)); 
-            when "011" => --soustraction 
+            when "0011" => --soustraction 
                tempR := ('0' & A) - ('0' & B);
                carry := not tempR(8);
                overflow := (A(7) xor B(7)) and (A(7) xor tempR(7));
-            when "010" => --multiplication
+            when "0010" => --multiplication
                 tempRMul := A*B;
                 tempR := tempRMul(8 downto 0);
                 if (tempRMul(15 downto 8) /= "00000000") then
@@ -78,25 +78,39 @@ process (A,B,Ctrl_ALU)
                  else 
                     overflow :='0';
                     end if; 
-            when "100" => --a<b
+            when "0100" => --a<b
                 if (a<b) then 
                 tempR:= '0'& x"01";
                 else 
                  tempR:='0'& x"00";
                  end if;
-            when "101" => --a>b
+          when "0101" => --a<=b
+             if (a<b or a=b) then 
+                tempR:='0'& x"01";
+             else 
+               tempR:='0'& x"00";
+             end if;
+            when "0110" => --a>b
                 if (a<b) then 
                     tempR:='0'& x"01";
                 else 
                    tempR:='0'& x"00";
                 end if;
-           when "110" => --a==b   
+           when "0111" => --a>=b
+                                if (a>b or a=b) then 
+                                    tempR:='0'& x"01";
+                                else 
+                                   tempR:='0'& x"00";
+                                end if;
+                                
+           
+           when "1000" => --a==b   
              if (a=b) then 
                 tempR:='0'& x"01";
              else 
                 tempR:='0'& x"00";
              end if;
-            when "111" => --a!=b   
+            when "1001" => --a!=b   
             if (a/=b) then 
                 tempR:='0'& x"01";
             else 

@@ -1,2 +1,4 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/counter.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity counter
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/GestAleas.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity GestAleas
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemInst.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity MemInst

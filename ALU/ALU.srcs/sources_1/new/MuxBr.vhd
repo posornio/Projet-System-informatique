@@ -43,7 +43,7 @@ architecture Behavioral of MuxBr is
 begin 
 multiplexBR : process (OP,B, QA) is
 begin 
-  if (OP=x"06") or (OP=x"07") then
+  if (OP=x"06") or (OP=x"07" or OP=x"00" or OP=x"0E" or OP=x"0E" or OP=x"0F" or OP=x"10" or OP=x"11") then
     outMUX<=B;
   else 
   outMUX<= QA;

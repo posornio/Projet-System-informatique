@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 28.05.2023 13:17:19
+-- Create Date: 31.05.2023 11:24:20
 -- Design Name: 
--- Module Name: LC_mr - Behavioral
+-- Module Name: muxJmp - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,25 +31,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity LC_mr is
+entity muxJmp is
     Port ( OP : in STD_LOGIC_VECTOR (7 downto 0);
-           s : out STD_LOGIC);
-end LC_mr;
+           Qa : in STD_LOGIC_VECTOR (7 downto 0);
+           Qb : in STD_LOGIC_VECTOR (7 downto 0);
+           s : out STD_LOGIC;
+           JmpTo : out STD_LOGIC_VECTOR (7 downto 0));
+end muxJmp;
 
-architecture Behavioral of LC_mr is
-
+architecture Behavioral of muxJmp is
 
 begin
-lcmr : process (OP) is 
-begin
-if (OP=x"08" or OP=x"00" or OP=x"0E" or OP=x"0E" or OP=x"0F" or OP=x"10" or OP=x"11" ) then 
-    s<='0';
-else
-   s<='1';
-   
-end if;
-
-end process;
-
+    s<='1' when OP=x"0F" and QA=x"00" else '0'; 
+    
 
 end Behavioral;

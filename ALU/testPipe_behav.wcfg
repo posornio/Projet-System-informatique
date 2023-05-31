@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testPipe_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="testPipe" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="1000000001fs"></ZoomEndTime>
+      <Cursor1Time time="130000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="156"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="48" />
+   <wvobject type="array" fp_name="/testPipe/lidi_a2diex">
+      <obj_property name="ElementShortName">lidi_a2diex[7:0]</obj_property>
+      <obj_property name="ObjectShortName">lidi_a2diex[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/lidi_b2diex">
+      <obj_property name="ElementShortName">lidi_b2diex[7:0]</obj_property>
+      <obj_property name="ObjectShortName">lidi_b2diex[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/lidi_c2BR">
+      <obj_property name="ElementShortName">lidi_c2BR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">lidi_c2BR[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/BR2diex_c">
+      <obj_property name="ElementShortName">BR2diex_c[7:0]</obj_property>
+      <obj_property name="ObjectShortName">BR2diex_c[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/lidi_op2diex">
+      <obj_property name="ElementShortName">lidi_op2diex[7:0]</obj_property>
+      <obj_property name="ObjectShortName">lidi_op2diex[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/diex_a2em">
+      <obj_property name="ElementShortName">diex_a2em[7:0]</obj_property>
+      <obj_property name="ObjectShortName">diex_a2em[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/diex_b2em">
+      <obj_property name="ElementShortName">diex_b2em[7:0]</obj_property>
+      <obj_property name="ObjectShortName">diex_b2em[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/muxAlu2em_b">
+      <obj_property name="ElementShortName">muxAlu2em_b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">muxAlu2em_b[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/diex_c2em">
+      <obj_property name="ElementShortName">diex_c2em[7:0]</obj_property>
+      <obj_property name="ObjectShortName">diex_c2em[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/diex_op2em">
+      <obj_property name="ElementShortName">diex_op2em[7:0]</obj_property>
+      <obj_property name="ObjectShortName">diex_op2em[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/em_a2mr">
+      <obj_property name="ElementShortName">em_a2mr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">em_a2mr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/em_b2mr">
+      <obj_property name="ElementShortName">em_b2mr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">em_b2mr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/muxMB2mr">
+      <obj_property name="ElementShortName">muxMB2mr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">muxMB2mr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/em_op2mr">
+      <obj_property name="ElementShortName">em_op2mr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">em_op2mr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/mem_re_b2DATA">
+      <obj_property name="ElementShortName">mem_re_b2DATA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_re_b2DATA[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/qa2mux1">
+      <obj_property name="ElementShortName">qa2mux1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">qa2mux1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/muxatMB">
+      <obj_property name="ElementShortName">muxatMB[7:0]</obj_property>
+      <obj_property name="ObjectShortName">muxatMB[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/OutMb2mux4">
+      <obj_property name="ElementShortName">OutMb2mux4[7:0]</obj_property>
+      <obj_property name="ObjectShortName">OutMb2mux4[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/mr2rb_atW">
+      <obj_property name="ElementShortName">mr2rb_atW[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mr2rb_atW[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/lc2ALU">
+      <obj_property name="ElementShortName">lc2ALU[3:0]</obj_property>
+      <obj_property name="ObjectShortName">lc2ALU[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/lc2_rw_mb">
+      <obj_property name="ElementShortName">lc2_rw_mb</obj_property>
+      <obj_property name="ObjectShortName">lc2_rw_mb</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/mr_op2lc">
+      <obj_property name="ElementShortName">mr_op2lc[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mr_op2lc[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/muxBR2DIEX_b">
+      <obj_property name="ElementShortName">muxBR2DIEX_b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">muxBR2DIEX_b[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/lc2_wBR">
+      <obj_property name="ElementShortName">lc2_wBR</obj_property>
+      <obj_property name="ObjectShortName">lc2_wBR</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/S_Alu">
+      <obj_property name="ElementShortName">S_Alu[7:0]</obj_property>
+      <obj_property name="ObjectShortName">S_Alu[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/aleas">
+      <obj_property name="ElementShortName">aleas</obj_property>
+      <obj_property name="ObjectShortName">aleas</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/OutINSTs">
+      <obj_property name="ElementShortName">OutINSTs[31:0]</obj_property>
+      <obj_property name="ObjectShortName">OutINSTs[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/OutINST_alea">
+      <obj_property name="ElementShortName">OutINST_alea[31:0]</obj_property>
+      <obj_property name="ObjectShortName">OutINST_alea[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/jmp">
+      <obj_property name="ElementShortName">jmp</obj_property>
+      <obj_property name="ObjectShortName">jmp</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/jumpto">
+      <obj_property name="ElementShortName">jumpto[7:0]</obj_property>
+      <obj_property name="ObjectShortName">jumpto[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/CLk">
+      <obj_property name="ElementShortName">CLk</obj_property>
+      <obj_property name="ObjectShortName">CLk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/a_MI">
+      <obj_property name="ElementShortName">a_MI[7:0]</obj_property>
+      <obj_property name="ObjectShortName">a_MI[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/count/PAUSE">
+      <obj_property name="ElementShortName">PAUSE</obj_property>
+      <obj_property name="ObjectShortName">PAUSE</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/count/jumpto">
+      <obj_property name="ElementShortName">jumpto[7:0]</obj_property>
+      <obj_property name="ObjectShortName">jumpto[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/count/jmp">
+      <obj_property name="ElementShortName">jmp</obj_property>
+      <obj_property name="ObjectShortName">jmp</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/RST">
+      <obj_property name="ElementShortName">RST</obj_property>
+      <obj_property name="ObjectShortName">RST</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/testPipe/Clock_period">
+      <obj_property name="ElementShortName">Clock_period</obj_property>
+      <obj_property name="ObjectShortName">Clock_period</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[2]">
+      <obj_property name="ElementShortName">[2][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[2][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/gestA/op_diex">
+      <obj_property name="ElementShortName">op_diex[7:0]</obj_property>
+      <obj_property name="ObjectShortName">op_diex[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[0]">
+      <obj_property name="ElementShortName">[0][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[0][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/gestA/op_em">
+      <obj_property name="ElementShortName">op_em[7:0]</obj_property>
+      <obj_property name="ObjectShortName">op_em[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/gestA/QA">
+      <obj_property name="ElementShortName">QA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">QA[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testPipe/count/jmp">
+      <obj_property name="ElementShortName">jmp</obj_property>
+      <obj_property name="ObjectShortName">jmp</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/count/jumpto">
+      <obj_property name="ElementShortName">jumpto[7:0]</obj_property>
+      <obj_property name="ObjectShortName">jumpto[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/count/sortie">
+      <obj_property name="ElementShortName">sortie[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sortie[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/count/sortie">
+      <obj_property name="ElementShortName">sortie[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sortie[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/gestA/jumpTo">
+      <obj_property name="ElementShortName">jumpTo[7:0]</obj_property>
+      <obj_property name="ObjectShortName">jumpTo[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[2]">
+      <obj_property name="ElementShortName">[2][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[2][7:0]</obj_property>
+   </wvobject>
+</wave_config>

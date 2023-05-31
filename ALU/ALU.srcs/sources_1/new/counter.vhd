@@ -50,12 +50,12 @@ begin
     if RST='1' then 
         sortie <= x"00";
     elsif rising_edge(clk) then
-       if PAUSE='1' then 
+       if PAUSE='1' and jmp='0' then 
             sortie<=sortie;
-        if jmp='1' then sortie<=jumpto; end if;
+        elsif Pause='1' and jmp='1' then sortie<=jumpto; 
       else 
-        if jmp='0' then sortie<=sortie + x"01";
-        else sortie<=jumpto;
+        if jmp='0' and pause='0' then sortie<=sortie + x"01";
+        elsif jmp='1' and pause='0' then sortie<=jumpto;
         end if;
     end if;
     end if;

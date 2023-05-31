@@ -96,7 +96,6 @@ end component;
                  atW : in STD_LOGIC_VECTOR (3 downto 0);
                  W : in STD_LOGIC;
                  DATA : in STD_LOGIC_VECTOR (7 downto 0);
-                 op : in_std_LOGIC_VECTOR (7 downto 0);
                  RST : in STD_LOGIC;
                  CLK : in STD_LOGIC;
                  QA : out STD_LOGIC_VECTOR (7 downto 0);
@@ -260,7 +259,6 @@ RegisBank: RegBank port map(
     atW=>mr2rb_atW(3 downto 0),
     W=>lc2_wBR,
     DATA=>mem_re_b2DATA,
-    op=>lidi_op2diex,
     RST=>RST,
     CLK=>CLK,
     QA=>qa2mux1,
