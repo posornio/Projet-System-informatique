@@ -44,7 +44,7 @@ architecture Behavioral of muxALU is
 begin 
 multiplexALU : process (OP,B, S_ALU) is
 begin 
-  if ( OP > x"00" and OP < x"04") or ( OP > x"09" and OP < x"0E") then
+  if ( OP > x"00" and OP < x"04") or ( OP > x"09" and OP < x"0E") or op=x"12" or op=x"13" then
     S <= S_alu; --ADD, MUL, SOU
    else 
     S<= B;

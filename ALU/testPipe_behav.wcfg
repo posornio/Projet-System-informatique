@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="1000000001fs"></ZoomEndTime>
-      <Cursor1Time time="190000000fs"></Cursor1Time>
+      <ZoomStartTime time="111620000fs"></ZoomStartTime>
+      <ZoomEndTime time="359501494fs"></ZoomEndTime>
+      <Cursor1Time time="230000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="148"></NameColumnWidth>
+      <NameColumnWidth column_width="128"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="53" />
+   <WVObjectSize size="61" />
    <wvobject type="array" fp_name="/testPipe/lidi_a2diex">
       <obj_property name="ElementShortName">lidi_a2diex[7:0]</obj_property>
       <obj_property name="ObjectShortName">lidi_a2diex[7:0]</obj_property>
@@ -26,6 +26,22 @@
    <wvobject type="array" fp_name="/testPipe/lidi_b2diex">
       <obj_property name="ElementShortName">lidi_b2diex[7:0]</obj_property>
       <obj_property name="ObjectShortName">lidi_b2diex[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/atB">
+      <obj_property name="ElementShortName">atB[3:0]</obj_property>
+      <obj_property name="ObjectShortName">atB[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/OP">
+      <obj_property name="ElementShortName">OP[7:0]</obj_property>
+      <obj_property name="ObjectShortName">OP[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/QA">
+      <obj_property name="ElementShortName">QA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">QA[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/QB">
+      <obj_property name="ElementShortName">QB[7:0]</obj_property>
+      <obj_property name="ObjectShortName">QB[7:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/testPipe/lidi_c2BR">
       <obj_property name="ElementShortName">lidi_c2BR[7:0]</obj_property>
@@ -207,21 +223,13 @@
       <obj_property name="ElementShortName">jmp</obj_property>
       <obj_property name="ObjectShortName">jmp</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/testPipe/count/jumpto">
-      <obj_property name="ElementShortName">jumpto[7:0]</obj_property>
-      <obj_property name="ObjectShortName">jumpto[7:0]</obj_property>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[0]">
+      <obj_property name="ElementShortName">[0][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[0][7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/testPipe/count/sortie">
-      <obj_property name="ElementShortName">sortie[7:0]</obj_property>
-      <obj_property name="ObjectShortName">sortie[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/testPipe/count/sortie">
-      <obj_property name="ElementShortName">sortie[7:0]</obj_property>
-      <obj_property name="ObjectShortName">sortie[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/testPipe/gestA/jumpTo">
-      <obj_property name="ElementShortName">jumpTo[7:0]</obj_property>
-      <obj_property name="ObjectShortName">jumpTo[7:0]</obj_property>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[1]">
+      <obj_property name="ElementShortName">[1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[1][7:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[2]">
       <obj_property name="ElementShortName">[2][7:0]</obj_property>
@@ -230,5 +238,29 @@
    <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[3]">
       <obj_property name="ElementShortName">[3][7:0]</obj_property>
       <obj_property name="ObjectShortName">[3][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[4]">
+      <obj_property name="ElementShortName">[4][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[4][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/RegisBank/my_bank[5]">
+      <obj_property name="ElementShortName">[5][7:0]</obj_property>
+      <obj_property name="ObjectShortName">[5][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/ALUpip/Ctrl_Alu">
+      <obj_property name="ElementShortName">Ctrl_Alu[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Ctrl_Alu[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/ALUpip/A">
+      <obj_property name="ElementShortName">A[7:0]</obj_property>
+      <obj_property name="ObjectShortName">A[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/ALUpip/B">
+      <obj_property name="ElementShortName">B[7:0]</obj_property>
+      <obj_property name="ObjectShortName">B[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testPipe/ALUpip/S">
+      <obj_property name="ElementShortName">S[7:0]</obj_property>
+      <obj_property name="ObjectShortName">S[7:0]</obj_property>
    </wvobject>
 </wave_config>

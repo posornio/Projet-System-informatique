@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685463016">
-  <File Type="RDS-DCP" Name="Pipeline.dcp"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685541000">
   <File Type="PA-TCL" Name="Pipeline.tcl"/>
   <File Type="REPORTS-TCL" Name="Pipeline_reports.tcl"/>
   <File Type="RDS-RDS" Name="Pipeline.vds"/>
+  <File Type="RDS-DCP" Name="Pipeline.dcp"/>
   <File Type="RDS-UTIL-PB" Name="Pipeline_utilization_synth.pb"/>
   <File Type="RDS-UTIL" Name="Pipeline_utilization_synth.rpt"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
@@ -100,6 +100,13 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/Pipeline.vhd">
       <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/muxJmp.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>

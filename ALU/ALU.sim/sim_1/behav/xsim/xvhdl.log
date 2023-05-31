@@ -1,2 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/MemInst.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity MemInst
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/osorniog/Bureau/Projet Systeme Info/ALU/ALU.srcs/sources_1/new/muxALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity muxALU

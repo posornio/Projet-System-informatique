@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685541119">
+  <File Type="PA-TCL" Name="Pipeline.tcl"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="Pipeline_bus_skew_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="Pipeline_reports.tcl"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="Pipeline_bus_skew_routed.rpx"/>
+  <File Type="OPT-DCP" Name="Pipeline_opt.dcp"/>
+  <File Type="OPT-DRC" Name="Pipeline_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="Pipeline.hwdef"/>
+  <File Type="PWROPT-DCP" Name="Pipeline_pwropt.dcp"/>
+  <File Type="PLACE-DCP" Name="Pipeline_placed.dcp"/>
+  <File Type="PLACE-IO" Name="Pipeline_io_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="Pipeline_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="Pipeline_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="Pipeline_control_sets_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="Pipeline_incremental_reuse_pre_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="Pipeline_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="Pipeline_physopt.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="Pipeline_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="Pipeline_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="Pipeline_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="Pipeline_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="Pipeline_drc_routed.pb"/>
+  <File Type="BG-BIT" Name="Pipeline.bit"/>
+  <File Type="ROUTE-STATUS-PB" Name="Pipeline_route_status.pb"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="Pipeline_methodology_drc_routed.rpt"/>
+  <File Type="BG-BIN" Name="Pipeline.bin"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="Pipeline_timing_summary_routed.rpt"/>
+  <File Type="BITSTR-MSK" Name="Pipeline.msk"/>
+  <File Type="ROUTE-TIMING-PB" Name="Pipeline_timing_summary_routed.pb"/>
+  <File Type="BITSTR-RBT" Name="Pipeline.rbt"/>
+  <File Type="ROUTE-TIMING-RPX" Name="Pipeline_timing_summary_routed.rpx"/>
+  <File Type="BITSTR-NKY" Name="Pipeline.nky"/>
+  <File Type="BITSTR-BMM" Name="Pipeline_bd.bmm"/>
+  <File Type="ROUTE-CLK" Name="Pipeline_clock_utilization_routed.rpt"/>
+  <File Type="BG-DRC" Name="Pipeline.drc"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="Pipeline_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="Pipeline.mmi"/>
+  <File Type="ROUTE-BUS-SKEW" Name="Pipeline_bus_skew_routed.rpt"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="BG-BGN" Name="Pipeline.bgn"/>
+  <File Type="BITSTR-SYSDEF" Name="Pipeline.sysdef"/>
+  <File Type="BITSTR-LTX" Name="Pipeline.ltx"/>
+  <File Type="RDI-RDI" Name="Pipeline.vdi"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Pipeline_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Pipeline_postroute_physopt.dcp"/>
+  <File Type="ROUTE-STATUS" Name="Pipeline_route_status.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="Pipeline_power_routed.rpx"/>
+  <File Type="ROUTE-PWR-SUM" Name="Pipeline_power_summary_routed.pb"/>
+  <File Type="ROUTE-PWR" Name="Pipeline_power_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="Pipeline_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="Pipeline_drc_routed.rpx"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/GestAleas.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/LC_MB.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/LC_mr.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/MemBank.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/MemInst.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/MuxBr.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/RegBank.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/counter.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/etage3.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/etage4.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/lc_alu.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/muxALU.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/muxIN_MB.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/mux_outMB.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Pipeline.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/muxJmp.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="Pipeline"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/new/constraints.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/constraints.xdc"/>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>

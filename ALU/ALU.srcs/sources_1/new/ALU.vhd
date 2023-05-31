@@ -97,11 +97,11 @@ process (A,B,Ctrl_ALU)
                    tempR:='0'& x"00";
                 end if;
            when "0111" => --a>=b
-                                if (a>b or a=b) then 
-                                    tempR:='0'& x"01";
-                                else 
-                                   tempR:='0'& x"00";
-                                end if;
+             if (a>b or a=b) then 
+                 tempR:='0'& x"01";
+             else 
+              tempR:='0'& x"00";
+             end if;
                                 
            
            when "1000" => --a==b   

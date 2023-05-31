@@ -44,7 +44,6 @@ end Pipeline;
 
 
 architecture Behavioral of Pipeline is
-
 component counter is Port ( RST : in STD_LOGIC;
           CLK : in STD_LOGIC;
           PAUSE : in STD_LOGIC;
@@ -57,8 +56,11 @@ component GestAleas is  Port (Inst_LIDI:  in STD_LOGIC_VECTOR (31 downto 0);
            op_diex : in STD_LOGIC_VECTOR (7 downto 0);
            a_diex : in STD_LOGIC_VECTOR (7 downto 0);
            op_em : in STD_LOGIC_VECTOR (7 downto 0);
+           op_memre : in STD_LOGIC_VECTOR (7 downto 0);
+
            a_em : in STD_LOGIC_VECTOR (7 downto 0);
            QA: in std_logic_vector(7 downto 0);
+           QB: in STD_logic_vector(7 downto 0);
            s : out STD_LOGIC;
            jmpBit: out std_logic;
            jumpTo: out std_logic_vector( 7 downto 0);
@@ -80,7 +82,7 @@ end component;
               Z : out STD_LOGIC;
               C : out STD_LOGIC;
               S : out STD_LOGIC_VECTOR (7 downto 0);
-              Ctrl_Alu : in STD_LOGIC_VECTOR (2 downto 0));
+              Ctrl_Alu : in STD_LOGIC_VECTOR (3 downto 0));
   END COMPONENT;
   component Membank port (
                at : in STD_LOGIC_VECTOR (7 downto 0);
@@ -96,6 +98,7 @@ end component;
                  atW : in STD_LOGIC_VECTOR (3 downto 0);
                  W : in STD_LOGIC;
                  DATA : in STD_LOGIC_VECTOR (7 downto 0);
+                 OP : in STD_LOGIC_VECTOR (7 downto 0);
                  RST : in STD_LOGIC;
                  CLK : in STD_LOGIC;
                  QA : out STD_LOGIC_VECTOR (7 downto 0);
@@ -156,7 +159,7 @@ end component;
 
 component lc_ALU port ( 
     OP : in STD_LOGIC_VECTOR (7 downto 0);
-           S : out STD_LOGIC_VECTOR (2 downto 0));
+           S : out STD_LOGIC_VECTOR (3 downto 0));
 end component;
 
 component LC_mr port ( 
@@ -200,7 +203,7 @@ signal OutMb2mux4: STD_LOGIC_VECTOR (7 downto 0) :=x"00";
 signal mr2rb_atW: STD_LOGIC_VECTOR (7 downto 0) :=x"00";
 
 
-signal lc2ALU: std_logic_vector(2 downto 0);
+signal lc2ALU: std_logic_vector(3 downto 0);
 signal lc2_rw_mb: std_logic :='0';
 signal mr_op2lc: std_logic_VECTOR (7 downto 0) ;
 signal muxBR2DIEX_b: std_logic_VECTOR (7 downto 0) :=x"00";
@@ -215,17 +218,16 @@ signal OutINST_alea: std_logic_vector(31 downto 0);
 
 signal jmp: std_logic;
 signal jumpto: std_logic_vector(7 downto 0);
-
 --signal CLk: std_logic:='1';
 --signal RST: std_logic:='0';
 --constant Clock_period :time:=1Ns;
 
 begin
 
- count: counter port map(
+  count: counter port map(
    RST=>RST,   
    CLK=>CLK,
-   jmp=>jmp,
+   jmp=>jmp, 
    jumpto=>jumpto,
    PAUSE=>aleas,
    S=>a_MI);
@@ -237,7 +239,9 @@ gestA: GestAleas port map(
     jmpbit=>jmp,
     jumpto=>jumpto,
     QA=>qa2mux1,
+    QB =>diex_c2em,
     op_em =>diex_op2em,
+    op_memre=>em_op2mr,
     a_em => diex_a2em, 
     s=> aleas,
     outInst=>OutINST_alea
@@ -259,6 +263,7 @@ RegisBank: RegBank port map(
     atW=>mr2rb_atW(3 downto 0),
     W=>lc2_wBR,
     DATA=>mem_re_b2DATA,
+    op=>lidi_op2diex,
     RST=>RST,
     CLK=>CLK,
     QA=>qa2mux1,
@@ -364,6 +369,7 @@ lcmb: lc_mb port map(
 lcmr: lc_mr port map(
    OP=>mr_op2lc,
    S=>lc2_wBR);
+     
      
 process
 begin 

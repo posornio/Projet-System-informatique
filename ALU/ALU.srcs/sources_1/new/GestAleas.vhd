@@ -82,7 +82,9 @@ signal c_lidi: STD_LOGIC_VECTOR (7 downto 0) ;
     or (op_memre=x"10" and QA=QB) or (op_memre=x"11" and QA/=QB)) else '0';
     jmpAux<='1' when ((op_diex=x"0E") or (op_em=x"0F") or (op_memre=x"0F") or (op_diex=x"0F") 
         or (op_diex=x"10" ) or (op_diex=x"11")) else '0';
-    jumpTo<=a_lidi when op_memre=x"0E" or op_lidi=x"0F" or (op_memre=x"10" ) or (op_memre=x"11") ;
+    --jumpTo<=a_lidi when op_memre=x"0E" or op_lidi=x"0F" or (op_memre=x"10" ) or (op_memre=x"11") ;
+     jumpTo<=a_lidi when op_lidi=x"0E" or op_lidi=x"0F" or (op_lidi=x"10" ) or (op_lidi=x"11") ;
+
     s <= '1' when alea_di ='1' or alea_ex='1' or jmpAux='1'
      else '0';
      

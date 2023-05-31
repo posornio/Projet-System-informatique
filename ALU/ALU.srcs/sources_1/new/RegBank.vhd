@@ -48,11 +48,11 @@ end RegBank;
 architecture Behavioral of RegBank is
 type bank is array(0 to 15) of  STD_LOGIC_VECTOR (7 downto 0);
 signal my_bank: bank:= (
-    ( x"04"),(x"0E"), (x"08") , (x"0C") 
-    ,(x"0B"), (x"0A") ,(x"09"),
-    (x"08"), (x"07"), (x"06"),
-    (x"05"), (x"77" ), (x"08"), 
-    (x"08"), (x"0D"),(x"03")) ;
+    others=>(others=>'0')) ;
+    signal auxa :std_logic_vector (7 downto 0) :=x"00";
+        signal auxb :std_logic_vector (7 downto 0) :=x"00";
+        signal s :std_logic_vector (7 downto 0) :=x"00";
+
     
     begin
 
@@ -67,11 +67,17 @@ process
         else
             if (W='1') then
                 my_bank(to_integer(unsigned(atW))) <= Data;
+                
+            else 
+                if OP/=x"00" then
+                auxa<=my_bank(to_integer(unsigned(atA)));
+                auxB <=my_bank(to_integer(unsigned(atB)));
+                end if;
              end if;
      end if;
     
 end process;
-QA <= my_bank(to_integer(unsigned(atA))) when OP/=x"00";
-QB <= my_bank(to_integer(unsigned(atB)))when OP/=x"00";
+QA <= my_bank(to_integer(unsigned(atA))) when OP/=x"00" else auxa;
+QB <= my_bank(to_integer(unsigned(atB)))when OP/=x"00" else auxb;
 
 end Behavioral;
